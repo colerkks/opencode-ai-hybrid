@@ -9,7 +9,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-brightgreen)](https://opencode.ai/)
 
-**中文** | [English](README_EN.md)
+**[中文](docs/README_CN.md)** | [English](README_EN.md)
 
 </div>
 
