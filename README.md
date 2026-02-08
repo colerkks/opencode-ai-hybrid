@@ -99,6 +99,19 @@ After installing, restart OpenCode Desktop and run:
 
 These commands are generated into `.opencode/commands/` by the plugin and call deterministic tools (`arch_status`, `arch_reload`, `arch_init`).
 
+### 🆕 Automatic Project Initialization
+
+The plugin now features **full auto-initialization**. When you open any project:
+
+1. ✅ Automatically detects project root
+2. ✅ Creates/fills `skills.lock.json` with default skills
+3. ✅ Auto-reloads to apply changes
+4. ✅ Respects existing project configuration
+
+**No manual `/arch-init` needed!** Just open a project and start coding.
+
+See [Auto-Init Guide](docs/AUTO_INIT.md) for details.
+
 ### 2. Manual Installation
 
 ```bash
