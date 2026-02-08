@@ -126,6 +126,36 @@ skills list
 
 ---
 
+## 🔄 Maintenance
+
+### Upgrade to Latest Version
+
+```bash
+~/.opencode-ai-hybrid/bin/update.sh
+```
+
+Or download and run directly:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/bin/update.sh | bash
+```
+
+### Uninstall
+
+```bash
+~/.opencode-ai-hybrid/bin/uninstall.sh
+```
+
+Or download and run directly:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/bin/uninstall.sh | bash
+```
+
+For detailed maintenance instructions, see [MAINTENANCE.md](MAINTENANCE.md).
+
+---
+
 ## 📚 Documentation
 
 ### 🚀 Quick Access
