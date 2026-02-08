@@ -4,7 +4,7 @@
 
 **业界领先的 AI 编程环境**
 
-[![版本](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
+[![版本](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
 [![许可证](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-brightgreen)](https://opencode.ai/)
@@ -79,6 +79,42 @@
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 ```
 
+### 1.5 VS Code 扩展 🆕
+
+我们现在提供功能齐全的 **VS Code 扩展**，可直接从编辑器管理混合架构！
+
+**特性：**
+- 🎛️ **仪表板面板** - 可视化架构状态和配置
+- 🌲 **树形视图** - 浏览技能、模板和文档
+- ⚡ **快速操作** - 一键初始化、重新加载和管理架构
+- 🔧 **配置管理器** - 编辑 AGENTS.md 和配置文件
+
+**安装方法：**
+1. 打开 VS Code
+2. 转到扩展（Ctrl+Shift+X）
+3. 搜索 "OpenCode AI Hybrid"
+4. 点击安装
+
+或通过 CLI 安装：
+```bash
+cd vscode-extension
+npm install
+npm run package
+# 在 VS Code 中安装生成的 .vsix 文件
+```
+
+### 1.6 OpenCode 插件（桌面版）
+
+本仓库包含与 OpenCode 桌面版兼容的插件：`opencode-ai-hybrid (Kyle1.0)`。
+
+安装后，重启 OpenCode 桌面版并运行：
+
+- `/arch-init` - 初始化混合架构
+- `/arch-status` - 检查架构状态
+- `/arch-reload` - 重新加载配置
+
+这些命令由插件生成到 `.opencode/commands/` 目录中，并调用确定性工具（`arch_status`、`arch_reload`、`arch_init`）。
+
 ### 2. 手动安装
 
 ```bash
@@ -108,12 +144,19 @@ skills list
 
 ## 📚 文档
 
-- **中文文档** - 完整中文文档（本文件）
-- [English Docs](README_EN.md) - 完整英文文档
-- [Architecture](ARCHITECTURE.md) - 架构深度解析
-- [Skills Guide](SKILLS_GUIDE.md) - 如何使用和创建技能
-- [Migration Guide](MIGRATION.md) - 从现有设置迁移
-- [FAQ](FAQ.md) - 常见问题解答
+| 📖 文档 | 🌐 语言 | 📋 描述 |
+|---------|---------|---------|
+| **中文文档** | 🇨🇳 中文 | 完整中文文档（本文件） |
+| [English Docs](README_EN.md) | 🇺🇸 English | 完整英文文档 |
+| [📦 安装指南](../INSTALLATION.md) | 🇺🇸 English | **🆕 详细安装指南** |
+| [🏗️ 架构文档](ARCHITECTURE.md) | 🇺🇸 English | 架构深度解析 |
+| [🛠️ 技能指南](SKILLS_GUIDE.md) | 🇺🇸 English | 如何使用和创建技能 |
+| [🚀 快速开始](../QUICKSTART.md) | 🇺🇸 English | 5分钟快速上手 |
+| [🔄 迁移指南](MIGRATION.md) | 🇺🇸 English | 从现有设置迁移 |
+| [📂 项目结构](../PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 项目快速参考** |
+| [🗺️ 路线图](../ROADMAP.md) | 🇺🇸 English | **🆕 未来规划** |
+| [📝 更新日志](../CHANGELOG.md) | 🇺🇸 English | **🆕 版本历史** |
+| [❓ 常见问题](FAQ.md) | 🇺🇸 English | 常见问题解答 |
 
 ---
 

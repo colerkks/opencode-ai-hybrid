@@ -24,29 +24,40 @@ A **production-ready, industry-leading AI programming environment** that combine
 3. **npx skills** - Standardized skill management (Cross-platform)
 
 ## What you get (in one picture)
-<img width="1375" height="990" alt="image" src="https://github.com/user-attachments/assets/125f9f46-8df1-422f-9c52-3b1455726340" />
 
-### The Hybrid Architecture
-<img width="1075" height="841" alt="image" src="https://github.com/user-attachments/assets/0a882e28-ad49-46a7-9ba0-ef02a1730137" />
+```mermaid
+flowchart TB
+  U[需求/Issue] --> P(Project Layer)
+  P --> A[AGENTS.md<br/>项目宪法：规则/边界/目录/风格]
+  P --> D[.next-docs/<br/>按需文档检索索引]
+  P --> L[skills.lock.json<br/>技能版本锁定]
 
+  subgraph CORE[Hybrid Engine]
+    direction TB
+    subgraph RAG[Doc-on-demand]
+      A --> R1[先检索再编码]
+      D --> R1
+    end
+    subgraph MCPX[Tool-on-demand]
+      M0[mcpx 工具目录] --> M1[动态加载工具定义]
+      M1 --> M2[调用工具链：build/test/lint/cli/api]
+    end
+    subgraph SK[Skills]
+      S0[npx skills] --> S1[安装技能包：SKILL.md 标准]
+      S1 --> S2[执行 SOP：拆解/调试/重构/发布]
+      L --> S2
+    end
+  end
+
+  R1 --> OUT[PR / Patch]
+  M2 --> OUT
+  S2 --> OUT
+
+  OUT --> FB[复盘回灌]
+  FB --> A
+  FB --> S1
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  Project Layer (Highest Priority)                           │
-│  ├── AGENTS.md              # Project-specific rules        │
-│  ├── .next-docs/            # Documentation index           │
-│  └── skills.lock.json       # Skill version locking         │
-├─────────────────────────────────────────────────────────────┤
-│  Skill Layer (Middle Priority)                              │
-│  ├── nextjs-docs-router     # Next.js documentation routing │
-│  ├── nextjs-debug          # Debug SOP                      │
-│  └── [More skills...]      # Extensible                     │
-├─────────────────────────────────────────────────────────────┤
-│  Global Layer (Base Priority)                               │
-│  ├── AGENTS.md             # Global behavior rules          │
-│  ├── mcpx config           # On-demand tool discovery       │
-│  └── npx skills            # Skill management               │
-└─────────────────────────────────────────────────────────────┘
-```
+
 
 **Priority Rule**: Project > Skill > Global
 

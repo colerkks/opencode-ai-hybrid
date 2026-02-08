@@ -4,7 +4,7 @@
 
 **The Industry-Leading AI Programming Environment**
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
+[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-brightgreen)](https://opencode.ai/)
@@ -79,6 +79,42 @@ A **production-ready, industry-leading AI programming environment** that combine
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 ```
 
+### 1.5 VS Code Extension 🆕
+
+We now provide a full-featured **VS Code Extension** for managing the hybrid architecture directly from your editor!
+
+**Features:**
+- 🎛️ **Dashboard Panel** - Visual architecture status and configuration
+- 🌲 **Tree View** - Browse skills, templates, and documentation
+- ⚡ **Quick Actions** - Initialize, reload, and manage architecture with one click
+- 🔧 **Config Manager** - Edit AGENTS.md and configuration files
+
+**Installation:**
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search for "OpenCode AI Hybrid"
+4. Click Install
+
+Or install from CLI:
+```bash
+cd vscode-extension
+npm install
+npm run package
+# Install the generated .vsix file in VS Code
+```
+
+### 1.6 OpenCode Plugin (Desktop)
+
+This repo includes an OpenCode Desktop-compatible plugin: `opencode-ai-hybrid (Kyle1.0)`.
+
+After installing, restart OpenCode Desktop and run:
+
+- `/arch-init` - Initialize hybrid architecture
+- `/arch-status` - Check architecture status
+- `/arch-reload` - Reload configuration
+
+These commands are generated into `.opencode/commands/` by the plugin and call deterministic tools (`arch_status`, `arch_reload`, `arch_init`).
+
 ### 2. Manual Installation
 
 ```bash
@@ -108,12 +144,19 @@ skills list
 
 ## 📚 Documentation
 
-- [中文文档](README_CN.md) - Complete Chinese documentation
-- **English Docs** - Complete English documentation (this file)
-- [Architecture](ARCHITECTURE.md) - Architecture deep dive
-- [Skills Guide](SKILLS_GUIDE.md) - How to use and create skills
-- [Migration Guide](MIGRATION.md) - Migrate from existing setups
-- [FAQ](FAQ.md) - Frequently asked questions
+| 📖 Document | 🌐 Language | 📋 Description |
+|-------------|-------------|----------------|
+| [中文文档](README_CN.md) | 🇨🇳 中文 | Complete Chinese documentation |
+| **English Docs** | 🇺🇸 English | Complete English documentation (this file) |
+| [📦 Installation](../INSTALLATION.md) | 🇺🇸 English | **🆕 Detailed setup guide** |
+| [🏗️ Architecture](ARCHITECTURE.md) | 🇺🇸 English | Architecture deep dive |
+| [🛠️ Skills Guide](SKILLS_GUIDE.md) | 🇺🇸 English | How to use and create skills |
+| [🚀 Quick Start](../QUICKSTART.md) | 🇺🇸 English | Get started in 5 minutes |
+| [🔄 Migration](MIGRATION.md) | 🇺🇸 English | Migrate from existing setups |
+| [📂 Structure](../PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 Project quick reference** |
+| [🗺️ Roadmap](../ROADMAP.md) | 🇺🇸 English | **🆕 Future plans** |
+| [📝 Changelog](../CHANGELOG.md) | 🇺🇸 English | **🆕 Version history** |
+| [❓ FAQ](FAQ.md) | 🇺🇸 English | Frequently asked questions |
 
 ---
 
