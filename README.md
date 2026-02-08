@@ -4,7 +4,7 @@
 
 **The Industry-Leading AI Programming Environment**
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/yourusername/opencode-ai-hybrid)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-brightgreen)](https://opencode.ai/)
@@ -76,14 +76,14 @@ A **production-ready, industry-leading AI programming environment** that combine
 ### 1. One-Line Installation
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/opencode-ai-hybrid/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 ```
 
 ### 2. Manual Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/opencode-ai-hybrid.git
+git clone https://github.com/colerkks/opencode-ai-hybrid.git
 cd opencode-ai-hybrid
 
 # Run installer
@@ -108,12 +108,28 @@ skills list
 
 ## 📚 Documentation
 
-- [中文文档](docs/README_CN.md) - 完整中文文档
-- [English Docs](docs/README_EN.md) - Complete English documentation
-- [Architecture](docs/ARCHITECTURE.md) - Architecture deep dive
-- [Skills Guide](docs/SKILLS_GUIDE.md) - How to use and create skills
-- [Migration Guide](docs/MIGRATION.md) - Migrate from existing setups
-- [FAQ](docs/FAQ.md) - Frequently asked questions
+### 🚀 Quick Access
+
+| 📖 Document | 🌐 Language | 📋 Description |
+|-------------|-------------|----------------|
+| [中文完整文档](docs/README_CN.md) | 🇨🇳 中文 | 完整的架构说明、安装指南和使用教程 |
+| [English Docs](docs/README_EN.md) | 🇺🇸 English | Complete architecture guide and documentation |
+| [Architecture](docs/ARCHITECTURE.md) | 🇺🇸 English | Deep dive into three-layer architecture |
+| [Skills Guide](docs/SKILLS_GUIDE.md) | 🇺🇸 English | Create and use skills guide |
+| [Migration Guide](docs/MIGRATION.md) | 🇺🇸 English | Migrate from existing setups |
+| [FAQ](docs/FAQ.md) | 🇺🇸 English | Frequently asked questions |
+
+### 📁 Document Structure
+
+```
+docs/
+├── README_CN.md        # 中文文档 (Complete Chinese)
+├── README_EN.md        # English Docs (Complete English)
+├── ARCHITECTURE.md     # Architecture deep dive
+├── SKILLS_GUIDE.md     # Skill creation guide
+├── MIGRATION.md        # Migration instructions
+└── FAQ.md              # 15+ Q&A
+```
 
 ---
 
@@ -295,11 +311,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## 👤 Author
+
+**Kyle** 
+
+- 📧 Email: [renke@fofvc.com](mailto:renke@fofvc.com)
+- 🐙 GitHub: [@colerkks](https://github.com/colerkks)
+
+---
+
 ## 📞 Support
 
-- 📧 Issues: [GitHub Issues](https://github.com/yourusername/opencode-ai-hybrid/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/opencode-ai-hybrid/discussions)
-- 📖 Wiki: [GitHub Wiki](https://github.com/yourusername/opencode-ai-hybrid/wiki)
+- 🐛 Issues: [GitHub Issues](https://github.com/colerkks/opencode-ai-hybrid/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/colerkks/opencode-ai-hybrid/discussions)
+- 📖 Wiki: [GitHub Wiki](https://github.com/colerkks/opencode-ai-hybrid/wiki)
 
 ---
 

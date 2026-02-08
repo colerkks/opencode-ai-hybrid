@@ -286,6 +286,15 @@ AI 助手：
 
 ---
 
+## 👤 作者
+
+**Kyle** 
+
+- 📧 邮箱：[renke@fofvc.com](mailto:renke@fofvc.com)
+- 🐙 GitHub：[@colerkks](https://github.com/colerkks)
+
+---
+
 ## 🙏 致谢
 
 - [Vercel](https://vercel.com/) - AGENTS.md 研究和技能工具

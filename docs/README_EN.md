@@ -286,6 +286,15 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 
 ---
 
+## 👤 Author
+
+**Kyle** 
+
+- 📧 Email: [renke@fofvc.com](mailto:renke@fofvc.com)
+- 🐙 GitHub: [@colerkks](https://github.com/colerkks)
+
+---
+
 ## 🙏 Acknowledgments
 
 - [Vercel](https://vercel.com/) - AGENTS.md research and skills tool
