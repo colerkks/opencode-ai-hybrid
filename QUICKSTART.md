@@ -13,12 +13,6 @@ Get started with OpenCode AI Hybrid Architecture in 5 minutes!
 ### One-Line Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourusername/opencode-ai-hybrid/main/install.sh | bash
-```
-
-Note: the correct URL is:
-
-```bash
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 ```
 
