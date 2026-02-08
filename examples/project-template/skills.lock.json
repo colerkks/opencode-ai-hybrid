@@ -1,0 +1,8 @@
+{
+  "skills": {
+    "nextjs-docs-router": "1.0.0",
+    "nextjs-debug": "1.0.0"
+  },
+  "updatedAt": "2026-02-08",
+  "notes": "技能版本锁定，确保团队一致性"
+}
