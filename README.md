@@ -318,13 +318,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 📧 Email: [renke@fofvc.com](mailto:renke@fofvc.com)
 - 🐙 GitHub: [@colerkks](https://github.com/colerkks)
 
----
-
-## 📞 Support
-
-- 🐛 Issues: [GitHub Issues](https://github.com/colerkks/opencode-ai-hybrid/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/colerkks/opencode-ai-hybrid/discussions)
-- 📖 Wiki: [GitHub Wiki](https://github.com/colerkks/opencode-ai-hybrid/wiki)
 
 ---
 
