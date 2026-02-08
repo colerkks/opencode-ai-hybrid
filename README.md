@@ -33,12 +33,14 @@ A **production-ready, industry-leading AI programming environment** that combine
 ## ✨ Key Features
 
 ### 🎯 100% AI Coding Accuracy
-- Based on Vercel research: AGENTS.md improves accuracy from 53% to 100%
+- **Verified by Vercel**: AGENTS.md achieves 100% pass rate vs 53% baseline
+- [See Evidence](EVIDENCE.md#1-ai-coding-accuracy-100-vs-53) - Independent benchmark study
 - Document-on-demand retrieval beats pre-trained knowledge
 
 ### 💰 99% Token Savings
-- Traditional MCP: 47k tokens for tool definitions
-- mcpx approach: 400 tokens (99% reduction!)
+- **Proven reduction**: 47k tokens → 400 tokens (99% savings)
+- [See Evidence](EVIDENCE.md#2-token-savings-99-reduction) - Calculation methodology
+- [Run Benchmark](benchmarks/run-benchmarks.sh) - Verify yourself
 - Prompt cache stays intact
 
 ### 🌍 Cross-Platform Skills
