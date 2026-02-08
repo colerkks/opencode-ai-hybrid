@@ -24,40 +24,7 @@ A **production-ready, industry-leading AI programming environment** that combine
 3. **npx skills** - Standardized skill management (Cross-platform)
 
 ## What you get (in one picture)
-
-```mermaid
-flowchart TB
-  U[需求/Issue] --> P(Project Layer)
-  P --> A[AGENTS.md<br/>项目宪法：规则/边界/目录/风格]
-  P --> D[.next-docs/<br/>按需文档检索索引]
-  P --> L[skills.lock.json<br/>技能版本锁定]
-
-  subgraph CORE[Hybrid Engine]
-    direction TB
-    subgraph RAG[Doc-on-demand]
-      A --> R1[先检索再编码]
-      D --> R1
-    end
-    subgraph MCPX[Tool-on-demand]
-      M0[mcpx 工具目录] --> M1[动态加载工具定义]
-      M1 --> M2[调用工具链：build/test/lint/cli/api]
-    end
-    subgraph SK[Skills]
-      S0[npx skills] --> S1[安装技能包：SKILL.md 标准]
-      S1 --> S2[执行 SOP：拆解/调试/重构/发布]
-      L --> S2
-    end
-  end
-
-  R1 --> OUT[PR / Patch]
-  M2 --> OUT
-  S2 --> OUT
-
-  OUT --> FB[复盘回灌]
-  FB --> A
-  FB --> S1
-```
-
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/3a30a31f-8a90-4edd-aa1a-34ad0948c93c" />
 
 **Priority Rule**: Project > Skill > Global
 
