@@ -149,11 +149,28 @@ npm uninstall -g @vercel/skills
 npm uninstall -g mcpx
 ```
 
+## Maintenance
+
+### Upgrade to Latest Version
+
+```bash
+~/.opencode-ai-hybrid/bin/update.sh
+```
+
+### Uninstall
+
+```bash
+~/.opencode-ai-hybrid/bin/uninstall.sh
+```
+
+For detailed maintenance instructions, see [MAINTENANCE.md](MAINTENANCE.md).
+
 ## Next Steps
 
 - Read the [Quick Start Guide](QUICKSTART.md)
 - Check out [Example Projects](examples/)
 - Learn about [Skills](docs/SKILLS_GUIDE.md)
+- Review [Maintenance Guide](MAINTENANCE.md)
 
 ## Support
 
