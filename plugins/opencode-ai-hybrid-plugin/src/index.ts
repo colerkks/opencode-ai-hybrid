@@ -5,6 +5,7 @@ import { ConfigManager } from "./core/ConfigManager.js";
 import { SkillManager } from "./core/SkillManager.js";
 import { ensureArchCommands } from "./commands/index.js";
 import { showArchToast } from "./tui/Panel.js";
+import { AutoInitializer } from "./utils/AutoInitializer.js";
 
 const HybridArchPlugin: Plugin = async (ctx) => {
   const configManager = new ConfigManager(ctx.directory);
@@ -126,6 +127,16 @@ const HybridArchPlugin: Plugin = async (ctx) => {
         const sessionID = props.info?.id;
         if (!sessionID) return;
 
+        // AUTO-INITIALIZATION: Run automatic setup for new sessions
+        const autoInit = new AutoInitializer(ctx.directory);
+        const initResult = await autoInit.initialize();
+        
+        // If skills were applied, reload to pick them up
+        if (initResult.appliedSkills.length > 0 && initResult.autoReload) {
+          await configManager.reload();
+          cached = await getState();
+        }
+
         // Ensure project commands exist so users can run /arch-status etc.
         // This is safe: only writes into .opencode/commands.
         await ensureArchCommands(ctx.directory);
@@ -147,8 +158,8 @@ const HybridArchPlugin: Plugin = async (ctx) => {
           query: { directory: ctx.directory },
         });
 
-        // Surface a small UI hint
-        await showArchToast(ctx.client, state, skills);
+        // Surface a small UI hint with auto-init info
+        await showArchToast(ctx.client, state, skills, initResult);
       }
     },
 

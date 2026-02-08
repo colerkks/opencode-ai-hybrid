@@ -1,10 +1,12 @@
 {
-  "agents": {
-    "sisyphus": {
-      "model": "anthropic/claude-opus-4-5",
-      "enabled": true
-    }
-  },
-  "mcpServers": ["filesystem", "github"],
-  "rules": ["AGENTS.md", "CLAUDE.md"]
+  "default_skills": ["nextjs-docs-router", "nextjs-debug"],
+  "auto_apply_defaults": true,
+  "auto_reload": true,
+  "project_root_markers": [
+    ".git",
+    "package.json",
+    "pnpm-lock.yaml",
+    "bun.lockb",
+    "pyproject.toml"
+  ]
 }
