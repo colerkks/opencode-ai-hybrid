@@ -4,7 +4,7 @@
 
 **The Industry-Leading AI Programming Environment**
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
+[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-brightgreen)](https://opencode.ai/)
@@ -115,14 +115,39 @@ flowchart TB
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 ```
 
-### 1.5 OpenCode Plugin (Desktop)
+### 1.5 VS Code Extension 🆕
+
+We now provide a full-featured **VS Code Extension** for managing the hybrid architecture directly from your editor!
+
+**Features:**
+- 🎛️ **Dashboard Panel** - Visual architecture status and configuration
+- 🌲 **Tree View** - Browse skills, templates, and documentation
+- ⚡ **Quick Actions** - Initialize, reload, and manage architecture with one click
+- 🔧 **Config Manager** - Edit AGENTS.md and configuration files
+
+**Installation:**
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search for "OpenCode AI Hybrid"
+4. Click Install
+
+Or install from CLI:
+```bash
+cd vscode-extension
+npm install
+npm run package
+# Install the generated .vsix file in VS Code
+```
+
+### 1.6 OpenCode Plugin (Desktop)
 
 This repo includes an OpenCode Desktop-compatible plugin: `opencode-ai-hybrid (Kyle1.0)`.
 
 After installing, restart OpenCode Desktop and run:
 
-- `/arch-init`
-- `/arch-status`
+- `/arch-init` - Initialize hybrid architecture
+- `/arch-status` - Check architecture status
+- `/arch-reload` - Reload configuration
 
 These commands are generated into `.opencode/commands/` by the plugin and call deterministic tools (`arch_status`, `arch_reload`, `arch_init`).
 
@@ -161,10 +186,15 @@ skills list
 |-------------|-------------|----------------|
 | [中文完整文档](docs/README_CN.md) | 🇨🇳 中文 | 完整的架构说明、安装指南和使用教程 |
 | [English Docs](docs/README_EN.md) | 🇺🇸 English | Complete architecture guide and documentation |
-| [Architecture](docs/ARCHITECTURE.md) | 🇺🇸 English | Deep dive into three-layer architecture |
-| [Skills Guide](docs/SKILLS_GUIDE.md) | 🇺🇸 English | Create and use skills guide |
-| [Migration Guide](docs/MIGRATION.md) | 🇺🇸 English | Migrate from existing setups |
-| [FAQ](docs/FAQ.md) | 🇺🇸 English | Frequently asked questions |
+| [📦 Installation](INSTALLATION.md) | 🇺🇸 English | **🆕 Detailed setup guide** |
+| [🏗️ Architecture](docs/ARCHITECTURE.md) | 🇺🇸 English | Deep dive into three-layer architecture |
+| [🛠️ Skills Guide](docs/SKILLS_GUIDE.md) | 🇺🇸 English | Create and use skills guide |
+| [🚀 Quick Start](QUICKSTART.md) | 🇺🇸 English | Get started in 5 minutes |
+| [🔄 Migration](docs/MIGRATION.md) | 🇺🇸 English | Migrate from existing setups |
+| [📂 Structure](PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 Project quick reference** |
+| [🗺️ Roadmap](ROADMAP.md) | 🇺🇸 English | **🆕 Future plans** |
+| [📝 Changelog](CHANGELOG.md) | 🇺🇸 English | **🆕 Version history** |
+| [❓ FAQ](docs/FAQ.md) | 🇺🇸 English | Frequently asked questions |
 
 ### 📁 Document Structure
 
@@ -175,7 +205,11 @@ docs/
 ├── ARCHITECTURE.md     # Architecture deep dive
 ├── SKILLS_GUIDE.md     # Skill creation guide
 ├── MIGRATION.md        # Migration instructions
-└── FAQ.md              # 15+ Q&A
+├── FAQ.md              # 15+ Q&A
+├── CHANGELOG.md        # Version history
+├── INSTALLATION.md     # Detailed installation guide
+├── PROJECT_STRUCTURE.md # Quick reference
+└── ROADMAP.md          # Future plans
 ```
 
 ---
@@ -297,6 +331,28 @@ AI Assistant:
 
 ---
 
+## 🏗️ What's Included
+
+### 📦 Core Components
+
+| Component | Description | Path |
+|-----------|-------------|------|
+| **VS Code Extension** | Full IDE integration | `vscode-extension/` |
+| **OpenCode Plugin** | Desktop plugin (Kyle1.0) | `plugins/opencode-ai-hybrid-plugin/` |
+| **CLI Commands** | Architecture management | `.opencode/commands/` |
+| **Skills Library** | Pre-built skills | `skills/` |
+| **Example Projects** | Starter templates | `examples/` |
+
+### 🆕 Latest Additions (v3.1.0)
+
+- ✅ **VS Code Extension** - Full IDE integration with dashboard
+- ✅ **GitHub Templates** - Issue templates, PR template, Security policy
+- ✅ **Enhanced Documentation** - Installation guide, Roadmap, Changelog
+- ✅ **Project Structure Docs** - Quick reference guide
+- ✅ **Editor Config** - Consistent coding style
+
+---
+
 ## 🏗️ Architecture Components
 
 ### 1. AGENTS.md v3.0
@@ -317,6 +373,12 @@ AI Assistant:
 - Version locking
 - Easy installation/updates
 
+### 4. VS Code Extension 🆕
+- Visual dashboard for architecture management
+- Tree view for skills and templates
+- Quick actions and configuration editing
+- Integrated documentation browser
+
 ---
 
 ## 🌍 Supported Platforms
@@ -326,6 +388,56 @@ AI Assistant:
 - ✅ Claude Code
 - ✅ GitHub Copilot
 - ✅ And 23+ more AI assistants
+
+---
+
+## 📂 Project Structure
+
+```
+opencode-ai-hybrid/
+├── 📁 .github/              # GitHub configuration
+│   ├── 📁 ISSUE_TEMPLATE/   # Issue templates
+│   ├── 📄 PULL_REQUEST_TEMPLATE.md
+│   └── 📄 SECURITY.md       # Security policy
+├── 📁 .opencode/            # OpenCode commands
+│   └── 📁 commands/
+│       ├── 📄 arch-init.md
+│       ├── 📄 arch-reload.md
+│       └── 📄 arch-status.md
+├── 📁 config/               # Configuration files
+│   ├── 📄 AGENTS.md
+│   ├── 📄 hybrid-arch.json
+│   └── 📄 mcp.json
+├── 📁 docs/                 # Documentation
+│   ├── 📄 README_CN.md      # 🇨🇳 中文文档
+│   ├── 📄 README_EN.md      # 🇺🇸 English
+│   ├── 📄 ARCHITECTURE.md
+│   ├── 📄 SKILLS_GUIDE.md
+│   ├── 📄 MIGRATION.md
+│   ├── 📄 FAQ.md
+│   ├── 📄 CHANGELOG.md      # 🆕 Version history
+│   ├── 📄 INSTALLATION.md   # 🆕 Setup guide
+│   ├── 📄 PROJECT_STRUCTURE.md # 🆕 Quick reference
+│   └── 📄 ROADMAP.md        # 🆕 Future plans
+├── 📁 examples/             # Example projects
+├── 📁 plugins/              # OpenCode plugins
+│   └── 📁 opencode-ai-hybrid-plugin/
+├── 📁 skills/               # Available skills
+│   ├── 📁 nextjs-docs-router/
+│   └── 📁 nextjs-debug/
+├── 📁 vscode-extension/     # 🆕 VS Code extension
+├── 📄 .editorconfig         # 🆕 Coding style config
+├── 📄 .gitignore
+├── 📄 CHANGELOG.md
+├── 📄 CONTRIBUTING.md
+├── 📄 INSTALLATION.md
+├── 📄 LICENSE
+├── 📄 PROJECT_STRUCTURE.md
+├── 📄 QUICKSTART.md
+├── 📄 README.md
+├── 📄 ROADMAP.md
+└── 📄 VERSION               # 🆕 Current version
+```
 
 ---
 
