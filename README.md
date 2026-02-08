@@ -115,6 +115,17 @@ flowchart TB
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 ```
 
+### 1.5 OpenCode Plugin (Desktop)
+
+This repo includes an OpenCode Desktop-compatible plugin: `opencode-ai-hybrid (Kyle1.0)`.
+
+After installing, restart OpenCode Desktop and run:
+
+- `/arch-init`
+- `/arch-status`
+
+These commands are generated into `.opencode/commands/` by the plugin and call deterministic tools (`arch_status`, `arch_reload`, `arch_init`).
+
 ### 2. Manual Installation
 
 ```bash

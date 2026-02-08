@@ -16,11 +16,17 @@ Get started with OpenCode AI Hybrid Architecture in 5 minutes!
 curl -fsSL https://raw.githubusercontent.com/yourusername/opencode-ai-hybrid/main/install.sh | bash
 ```
 
+Note: the correct URL is:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
+```
+
 ### Manual Install
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/opencode-ai-hybrid.git
+git clone https://github.com/colerkks/opencode-ai-hybrid.git
 cd opencode-ai-hybrid
 
 # 2. Run installer
@@ -94,6 +100,10 @@ AI:
 /debug     → Auto-diagnose and fix
 /prove     → Verify functionality
 /techdebt  → Find and eliminate debt
+
+/arch-init   → Initialize Hybrid Architecture (plugin)
+/arch-status → Show current architecture status
+/arch-reload → Reload configs and skills
 ```
 
 ## Next Steps
