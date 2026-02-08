@@ -24,40 +24,7 @@
 3. **npx skills** - 标准化技能管理（跨平台）
 
 ## 你能获得什么（一目了然）
-
-```mermaid
-flowchart TB
-  U[需求/Issue] --> P(Project Layer)
-  P --> A[AGENTS.md<br/>项目宪法：规则/边界/目录/风格]
-  P --> D[.next-docs/<br/>按需文档检索索引]
-  P --> L[skills.lock.json<br/>技能版本锁定]
-
-  subgraph CORE[Hybrid Engine]
-    direction TB
-    subgraph RAG[Doc-on-demand]
-      A --> R1[先检索再编码]
-      D --> R1
-    end
-    subgraph MCPX[Tool-on-demand]
-      M0[mcpx 工具目录] --> M1[动态加载工具定义]
-      M1 --> M2[调用工具链：build/test/lint/cli/api]
-    end
-    subgraph SK[Skills]
-      S0[npx skills] --> S1[安装技能包：SKILL.md 标准]
-      S1 --> S2[执行 SOP：拆解/调试/重构/发布]
-      L --> S2
-    end
-  end
-
-  R1 --> OUT[PR / Patch]
-  M2 --> OUT
-  S2 --> OUT
-
-  OUT --> FB[复盘回灌]
-  FB --> A
-  FB --> S1
-```
-
+<img width="1175" height="814" alt="image" src="https://github.com/user-attachments/assets/fcb5e62f-bae0-44d5-9964-29de48098a62" />
 
 **优先级规则**：项目 > 技能 > 全局
 
@@ -437,14 +404,6 @@ opencode-ai-hybrid/
 - [Anthropic](https://www.anthropic.com/) - Claude Code 最佳实践
 - [mcpx](https://github.com/cs50victor/mcpx) - 按需工具发现
 - [Next.js](https://nextjs.org/) - React 框架
-
----
-
-## 📞 支持
-
-- 📧 Issues: [GitHub Issues](https://github.com/colerkks/opencode-ai-hybrid/issues)
-- 💬 讨论: [GitHub Discussions](https://github.com/colerkks/opencode-ai-hybrid/discussions)
-- 📖 Wiki: [GitHub Wiki](https://github.com/colerkks/opencode-ai-hybrid/wiki)
 
 ---
 
