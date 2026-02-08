@@ -27,6 +27,7 @@ A **production-ready, industry-leading AI programming environment** that combine
 <img width="1375" height="990" alt="image" src="https://github.com/user-attachments/assets/125f9f46-8df1-422f-9c52-3b1455726340" />
 
 ### The Hybrid Architecture
+<img width="1075" height="841" alt="image" src="https://github.com/user-attachments/assets/0a882e28-ad49-46a7-9ba0-ef02a1730137" />
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
