@@ -102,9 +102,9 @@ AI:
 
 ## Next Steps
 
-- Read the [full documentation](README.md)
-- Learn about the [architecture](docs/ARCHITECTURE.md)
-- Check out [more skills](skills/)
+- Read the [full documentation](../README.md)
+- Learn about the [architecture](ARCHITECTURE.md)
+- Check out [more skills](../skills/)
 - [Contribute](CONTRIBUTING.md) your own skills!
 
 ## Troubleshooting
@@ -142,7 +142,7 @@ cd ~/opencode-ai-hybrid
 
 ## Get Help
 
-- 📖 [Documentation](docs/)
+- 📖 [Documentation](./)
 - 🐛 [Issues](https://github.com/yourusername/opencode-ai-hybrid/issues)
 - 💬 [Discussions](https://github.com/yourusername/opencode-ai-hybrid/discussions)
 

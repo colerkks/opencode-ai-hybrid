@@ -34,12 +34,12 @@ A **production-ready, industry-leading AI programming environment** that combine
 
 ### 🎯 100% AI Coding Accuracy
 - **Verified by Vercel**: AGENTS.md achieves 100% pass rate vs 53% baseline
-- [See Evidence](EVIDENCE.md#1-ai-coding-accuracy-100-vs-53) - Independent benchmark study
+- [See Evidence](docs/EVIDENCE.md#1-ai-coding-accuracy-100-vs-53) - Independent benchmark study
 - Document-on-demand retrieval beats pre-trained knowledge
 
 ### 💰 99% Token Savings
 - **Proven reduction**: 47k tokens → 400 tokens (99% savings)
-- [See Evidence](EVIDENCE.md#2-token-savings-99-reduction) - Calculation methodology
+- [See Evidence](docs/EVIDENCE.md#2-token-savings-99-reduction) - Calculation methodology
 - [Run Benchmark](benchmarks/run-benchmarks.sh) - Verify yourself
 - Prompt cache stays intact
 
@@ -165,7 +165,7 @@ Or download and run directly:
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/bin/uninstall.sh | bash
 ```
 
-For detailed maintenance instructions, see [MAINTENANCE.md](MAINTENANCE.md).
+For detailed maintenance instructions, see [MAINTENANCE.md](docs/MAINTENANCE.md).
 
 ---
 
@@ -177,13 +177,13 @@ For detailed maintenance instructions, see [MAINTENANCE.md](MAINTENANCE.md).
 |-------------|-------------|----------------|
 | [中文完整文档](docs/README_CN.md) | 🇨🇳 中文 | 完整的架构说明、安装指南和使用教程 |
 | [English Docs](docs/README_EN.md) | 🇺🇸 English | Complete architecture guide and documentation |
-| [📦 Installation](INSTALLATION.md) | 🇺🇸 English | **🆕 Detailed setup guide** |
+| [📦 Installation](docs/INSTALLATION.md) | 🇺🇸 English | **🆕 Detailed setup guide** |
 | [🏗️ Architecture](docs/ARCHITECTURE.md) | 🇺🇸 English | Deep dive into three-layer architecture |
 | [🛠️ Skills Guide](docs/SKILLS_GUIDE.md) | 🇺🇸 English | Create and use skills guide |
-| [🚀 Quick Start](QUICKSTART.md) | 🇺🇸 English | Get started in 5 minutes |
+| [🚀 Quick Start](docs/QUICKSTART.md) | 🇺🇸 English | Get started in 5 minutes |
 | [🔄 Migration](docs/MIGRATION.md) | 🇺🇸 English | Migrate from existing setups |
-| [📂 Structure](PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 Project quick reference** |
-| [🗺️ Roadmap](ROADMAP.md) | 🇺🇸 English | **🆕 Future plans** |
+| [📂 Structure](docs/PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 Project quick reference** |
+| [🗺️ Roadmap](docs/ROADMAP.md) | 🇺🇸 English | **🆕 Future plans** |
 | [📝 Changelog](CHANGELOG.md) | 🇺🇸 English | **🆕 Version history** |
 | [❓ FAQ](docs/FAQ.md) | 🇺🇸 English | Frequently asked questions |
 
@@ -434,7 +434,7 @@ opencode-ai-hybrid/
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+We welcome contributions! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
 ### Quick Contribution Guide
 

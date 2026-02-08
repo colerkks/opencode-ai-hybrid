@@ -148,13 +148,13 @@ skills list
 |-------------|-------------|----------------|
 | [中文文档](README_CN.md) | 🇨🇳 中文 | Complete Chinese documentation |
 | **English Docs** | 🇺🇸 English | Complete English documentation (this file) |
-| [📦 Installation](../INSTALLATION.md) | 🇺🇸 English | **🆕 Detailed setup guide** |
+| [📦 Installation](INSTALLATION.md) | 🇺🇸 English | **🆕 Detailed setup guide** |
 | [🏗️ Architecture](ARCHITECTURE.md) | 🇺🇸 English | Architecture deep dive |
 | [🛠️ Skills Guide](SKILLS_GUIDE.md) | 🇺🇸 English | How to use and create skills |
-| [🚀 Quick Start](../QUICKSTART.md) | 🇺🇸 English | Get started in 5 minutes |
+| [🚀 Quick Start](QUICKSTART.md) | 🇺🇸 English | Get started in 5 minutes |
 | [🔄 Migration](MIGRATION.md) | 🇺🇸 English | Migrate from existing setups |
-| [📂 Structure](../PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 Project quick reference** |
-| [🗺️ Roadmap](../ROADMAP.md) | 🇺🇸 English | **🆕 Future plans** |
+| [📂 Structure](PROJECT_STRUCTURE.md) | 🇺🇸 English | **🆕 Project quick reference** |
+| [🗺️ Roadmap](ROADMAP.md) | 🇺🇸 English | **🆕 Future plans** |
 | [📝 Changelog](../CHANGELOG.md) | 🇺🇸 English | **🆕 Version history** |
 | [❓ FAQ](FAQ.md) | 🇺🇸 English | Frequently asked questions |
 
@@ -311,7 +311,7 @@ AI Assistant:
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### Quick Contribution Guide
 

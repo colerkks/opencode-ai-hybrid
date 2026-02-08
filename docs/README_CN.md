@@ -371,7 +371,7 @@ opencode-ai-hybrid/
 
 ## 🤝 贡献
 
-我们欢迎贡献！请查看 [CONTRIBUTING.md](../CONTRIBUTING.md) 了解指南。
+我们欢迎贡献！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解指南。
 
 ### 快速贡献指南
 

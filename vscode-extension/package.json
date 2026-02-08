@@ -2,7 +2,7 @@
   "name": "hybrid-arch-opencode",
   "displayName": "Hybrid Architecture for OpenCode",
   "description": "Three-layer architecture (Global + Skill + Project) GUI for OpenCode hybrid-arch plugin",
-  "version": "1.0.0-kyle.1",
+  "version": "3.1.0",
   "publisher": "colerkks",
   "engines": {
     "vscode": "^1.74.0"
@@ -67,6 +67,18 @@
         "title": "Refresh",
         "category": "Hybrid Arch",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "hybridArch.editGlobalConfig",
+        "title": "Edit Global Config",
+        "category": "Hybrid Arch",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "hybridArch.editProjectConfig",
+        "title": "Edit Project Config",
+        "category": "Hybrid Arch",
+        "icon": "$(file-code)"
       }
     ],
     "views": {
@@ -96,6 +108,16 @@
           "command": "hybridArch.init",
           "when": "view == hybridArchExplorer",
           "group": "navigation"
+        },
+        {
+          "command": "hybridArch.editGlobalConfig",
+          "when": "view == hybridArchExplorer",
+          "group": "inline"
+        },
+        {
+          "command": "hybridArch.editProjectConfig",
+          "when": "view == hybridArchExplorer",
+          "group": "inline"
         }
       ],
       "view/item/context": [
@@ -116,6 +138,14 @@
         },
         {
           "command": "hybridArch.reload",
+          "when": "workspaceHasHybridArch"
+        },
+        {
+          "command": "hybridArch.editGlobalConfig",
+          "when": "workspaceHasHybridArch"
+        },
+        {
+          "command": "hybridArch.editProjectConfig",
           "when": "workspaceHasHybridArch"
         }
       ]

@@ -396,7 +396,7 @@ cat skill/SKILL.md | grep -A5 triggers
 
 ### Q: How do I contribute?
 
-**A**: See [CONTRIBUTING.md](../CONTRIBUTING.md):
+**A**: See [CONTRIBUTING.md](CONTRIBUTING.md):
 1. Fork repository
 2. Create feature branch
 3. Make changes

@@ -19,7 +19,15 @@
 │   ├── ARCHITECTURE.md   # Architecture deep dive
 │   ├── SKILLS_GUIDE.md   # Skill creation guide
 │   ├── MIGRATION.md      # Migration guide
-│   └── FAQ.md            # FAQ
+│   ├── FAQ.md            # FAQ
+│   ├── INSTALLATION.md   # Installation guide
+│   ├── MAINTENANCE.md    # Maintenance guide
+│   ├── METRICS_STATUS.md # Metrics status
+│   ├── PROJECT_STRUCTURE.md # Project structure
+│   ├── ROADMAP.md        # Roadmap
+│   ├── EVIDENCE.md       # Evidence
+│   ├── QUICKSTART.md     # Quick start
+│   └── CONTRIBUTING.md   # Contributing guide
 ├── examples/             # Example projects
 │   └── project-template/
 ├── plugins/              # OpenCode plugins
@@ -29,17 +37,16 @@
 │   └── nextjs-debug/
 ├── vscode-extension/     # VS Code extension
 ├── .gitignore
-├── CONTRIBUTING.md
 ├── install.sh
 ├── LICENSE
-├── QUICKSTART.md
-└── README.md
+├── README.md
+└── CHANGELOG.md
 ```
 
 ## Quick Links
 
-- [中文文档](docs/README_CN.md)
-- [English Docs](docs/README_EN.md)
+- [中文文档](README_CN.md)
+- [English Docs](README_EN.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Quick Start](QUICKSTART.md)
 

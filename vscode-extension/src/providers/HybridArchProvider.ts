@@ -3,9 +3,9 @@ import * as path from 'path';
 import { ConfigManager } from '../core/ConfigManager';
 import { Skill } from '../types';
 
-export class HybridArchProvider implements vscode.TreeDataProvider<SkillTreeItem> {
-    private _onDidChangeTreeData: vscode.EventEmitter<SkillTreeItem | undefined | null | void> = new vscode.EventEmitter<SkillTreeItem | undefined | null | void>();
-    readonly onDidChangeTreeData: vscode.Event<SkillTreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
+export class HybridArchProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+    private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | null | void> = new vscode.EventEmitter<vscode.TreeItem | undefined | null | void>();
+    readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
 
     constructor() {}
 
@@ -13,11 +13,11 @@ export class HybridArchProvider implements vscode.TreeDataProvider<SkillTreeItem
         this._onDidChangeTreeData.fire();
     }
 
-    getTreeItem(element: SkillTreeItem): vscode.TreeItem {
+    getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
         return element;
     }
 
-    async getChildren(element?: SkillTreeItem): Promise<SkillTreeItem[]> {
+    async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
         if (!element) {
             // Root level - show layers
             return [

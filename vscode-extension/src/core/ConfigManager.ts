@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as os from 'os';
 import { ArchStatus, HybridArchConfig, Skill } from '../types';
 
 export class ConfigManager {
@@ -10,7 +11,7 @@ export class ConfigManager {
 
     constructor() {
         // Global layer
-        const homeDir = process.env.HOME || process.env.USERPROFILE || '';
+        const homeDir = os.homedir();
         this.globalConfigPath = path.join(homeDir, '.config', 'opencode');
         
         // Skill layer
@@ -25,6 +26,14 @@ export class ConfigManager {
         }
     }
 
+    public getGlobalConfigPath(): string {
+        return this.globalConfigPath;
+    }
+
+    public getProjectConfigPath(): string {
+        return this.projectConfigPath;
+    }
+
     async getStatus(): Promise<ArchStatus> {
         const globalSkills = this.loadSkillsFromPath(this.globalConfigPath, 'global');
         const skillSkills = this.loadSkillsFromPath(this.skillConfigPath, 'skill');
@@ -33,7 +42,7 @@ export class ConfigManager {
             : [];
 
         return {
-            version: '1.0.0',
+            version: '3.1.0',
             global: {
                 path: this.globalConfigPath,
                 skills: globalSkills,

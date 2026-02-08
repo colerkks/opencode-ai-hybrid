@@ -78,6 +78,12 @@ export class DashboardPanel {
                     case 'installSkill':
                         vscode.commands.executeCommand('hybridArch.installSkill');
                         return;
+                    case 'editGlobal':
+                        vscode.commands.executeCommand('hybridArch.editGlobalConfig');
+                        return;
+                    case 'editProject':
+                        vscode.commands.executeCommand('hybridArch.editProjectConfig');
+                        return;
                     case 'openSkill':
                         if (message.path) {
                             vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(message.path), true);
@@ -382,6 +388,12 @@ export class DashboardPanel {
             <button class="secondary" onclick="refresh()">
                 <span>🔄</span> Reload
             </button>
+            <button class="secondary" onclick="editGlobal()">
+                <span>🌍</span> Global
+            </button>
+            <button class="secondary" onclick="editProject()">
+                <span>📁</span> Project
+            </button>
             <button onclick="installSkill()">
                 <span>⬇️</span> Install Skill
             </button>
@@ -403,6 +415,14 @@ export class DashboardPanel {
 
         function installSkill() {
             vscode.postMessage({ command: 'installSkill' });
+        }
+
+        function editGlobal() {
+            vscode.postMessage({ command: 'editGlobal' });
+        }
+
+        function editProject() {
+            vscode.postMessage({ command: 'editProject' });
         }
 
         function openSkill(path) {

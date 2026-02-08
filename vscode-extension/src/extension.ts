@@ -1,10 +1,14 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as cp from 'child_process';
+import * as util from 'util';
 import { DashboardPanel } from './panels/DashboardPanel';
 import { HybridArchProvider } from './providers/HybridArchProvider';
 import { ConfigManager } from './core/ConfigManager';
 import { ArchStatus } from './types';
+
+const exec = util.promisify(cp.exec);
 
 let statusBarItem: vscode.StatusBarItem;
 
@@ -63,6 +67,36 @@ export function activate(context: vscode.ExtensionContext) {
         hybridArchProvider.refresh();
     });
 
+    const editGlobalConfigCmd = vscode.commands.registerCommand('hybridArch.editGlobalConfig', async () => {
+        const configManager = new ConfigManager();
+        const globalPath = configManager.getGlobalConfigPath();
+        const agentsMdPath = path.join(globalPath, 'AGENTS.md');
+        
+        if (fs.existsSync(agentsMdPath)) {
+            const doc = await vscode.workspace.openTextDocument(agentsMdPath);
+            await vscode.window.showTextDocument(doc);
+        } else {
+            vscode.window.showErrorMessage(`Global configuration not found at ${agentsMdPath}`);
+        }
+    });
+
+    const editProjectConfigCmd = vscode.commands.registerCommand('hybridArch.editProjectConfig', async () => {
+        const configManager = new ConfigManager();
+        const projectPath = configManager.getProjectConfigPath();
+        if (!projectPath) {
+             vscode.window.showErrorMessage('No project open');
+             return;
+        }
+        const agentsMdPath = path.join(path.dirname(projectPath), 'AGENTS.md');
+        
+        if (fs.existsSync(agentsMdPath)) {
+            const doc = await vscode.workspace.openTextDocument(agentsMdPath);
+            await vscode.window.showTextDocument(doc);
+        } else {
+             vscode.window.showErrorMessage(`Project configuration not found at ${agentsMdPath}`);
+        }
+    });
+
     // Add all commands to subscriptions
     context.subscriptions.push(
         showDashboardCmd,
@@ -71,7 +105,9 @@ export function activate(context: vscode.ExtensionContext) {
         reloadCmd,
         installSkillCmd,
         openSkillCmd,
-        refreshExplorerCmd
+        refreshExplorerCmd,
+        editGlobalConfigCmd,
+        editProjectConfigCmd
     );
 
     // Initial status refresh
@@ -273,14 +309,21 @@ async function installSkill(): Promise<void> {
         cancellable: false
     }, async (progress) => {
         try {
-            // Simulate installation (in real implementation, this would call the CLI or API)
-            progress.report({ increment: 50, message: 'Downloading...' });
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            progress.report({ increment: 10, message: 'Running npx skills add...' });
             
-            progress.report({ increment: 50, message: 'Installing...' });
-            await new Promise(resolve => setTimeout(resolve, 500));
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (!workspaceFolders) {
+                throw new Error('No workspace open');
+            }
+            const cwd = workspaceFolders[0].uri.fsPath;
 
-            vscode.window.showInformationMessage(`✅ Skill "${skillName}" installed`);
+            // Execute the command
+            // We use npx to execute the skills CLI
+            await exec(`npx skills add ${skillName}`, { cwd });
+            
+            progress.report({ increment: 100, message: 'Done!' });
+
+            vscode.window.showInformationMessage(`✅ Skill "${skillName}" installed successfully!`);
             refreshStatus();
         } catch (error) {
             vscode.window.showErrorMessage(`Failed to install skill: ${error}`);

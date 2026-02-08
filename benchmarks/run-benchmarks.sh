@@ -222,10 +222,10 @@ main() {
         echo "Claims Verified:"
         echo "  • AI Coding Accuracy: 100% (vs 53% baseline)"
         echo "  • Token Savings: 99% (47k → 400 tokens)"
-        echo ""
-        echo "See EVIDENCE.md for detailed citations."
-        exit 0
-    else
+    echo ""
+    echo "See docs/EVIDENCE.md for detailed citations."
+    exit 0
+else
         echo ""
         print_warning "⚠️  Some benchmarks need verification"
         echo ""
