@@ -9,7 +9,7 @@ echo "OpenCode AI Hybrid Architecture Installer"
 echo "=========================================="
 echo ""
 
-REPO_URL="https://github.com/yourusername/opencode-ai-hybrid"
+REPO_URL="https://github.com/colerkks/opencode-ai-hybrid"
 INSTALL_DIR="${HOME}/.opencode-ai-hybrid"
 CONFIG_DIR="${HOME}/.config/opencode"
 MCP_CONFIG_DIR="${HOME}/.config/mcp"
@@ -80,8 +80,10 @@ fi
 echo "[INFO] Setting up AGENTS.md..."
 mkdir -p "$CONFIG_DIR"
 if [[ -f "$INSTALL_DIR/config/AGENTS.md" ]]; then
-    cp "$INSTALL_DIR/config/AGENTS.md" "$CONFIG_DIR/AGENTS.md"
-    echo "[SUCCESS] AGENTS.md installed"
+  cp "$INSTALL_DIR/config/AGENTS.md" "$CONFIG_DIR/AGENTS.md"
+  echo "[SUCCESS] AGENTS.md installed"
+else
+  echo "[WARNING] Missing $INSTALL_DIR/config/AGENTS.md (repo may be incomplete)"
 fi
 
 # Setup MCP config
@@ -92,11 +94,34 @@ if [[ -f "$INSTALL_DIR/config/mcp.json" ]]; then
     echo "[SUCCESS] MCP configuration installed"
 fi
 
+# Setup Hybrid Arch global config
+echo "[INFO] Setting up Hybrid Arch global config..."
+if [[ -f "$INSTALL_DIR/config/hybrid-arch.json" ]]; then
+  cp "$INSTALL_DIR/config/hybrid-arch.json" "$CONFIG_DIR/hybrid-arch.json"
+  echo "[SUCCESS] hybrid-arch.json installed"
+else
+  echo "[WARNING] Missing $INSTALL_DIR/config/hybrid-arch.json"
+fi
+
 # Setup skills
 echo "[INFO] Installing skills..."
 mkdir -p "$CONFIG_DIR/skills"
 cp -r "$INSTALL_DIR/skills/"* "$CONFIG_DIR/skills/" 2>/dev/null || true
 echo "[SUCCESS] Skills installed"
+
+# Setup OpenCode plugin (Desktop-safe local plugin install)
+echo "[INFO] Installing OpenCode plugin (opencode-ai-hybrid)..."
+mkdir -p "$CONFIG_DIR/plugins/opencode-ai-hybrid"
+if [[ -d "$INSTALL_DIR/plugins/opencode-ai-hybrid-plugin/dist" ]]; then
+  rm -rf "$CONFIG_DIR/plugins/opencode-ai-hybrid/dist" 2>/dev/null || true
+  cp -r "$INSTALL_DIR/plugins/opencode-ai-hybrid-plugin/dist" "$CONFIG_DIR/plugins/opencode-ai-hybrid/"
+  cat > "$CONFIG_DIR/plugins/opencode-ai-hybrid.js" <<'EOF'
+export { default } from "./opencode-ai-hybrid/dist/index.js";
+EOF
+  echo "[SUCCESS] OpenCode plugin installed"
+else
+  echo "[WARNING] Missing plugin dist at $INSTALL_DIR/plugins/opencode-ai-hybrid-plugin/dist"
+fi
 
 echo ""
 echo "=========================================="
@@ -107,6 +132,7 @@ echo "Quick start:"
 echo "  1. Restart your terminal"
 echo "  2. Run: mcpx list"
 echo "  3. Run: skills list"
+echo "  4. Restart OpenCode Desktop, then run: /arch-init"
 echo ""
 echo "Documentation: $INSTALL_DIR/README.md"
 echo ""

@@ -1,0 +1,10 @@
+{
+  "agents": {
+    "sisyphus": {
+      "model": "anthropic/claude-opus-4-5",
+      "enabled": true
+    }
+  },
+  "mcpServers": ["filesystem", "github"],
+  "rules": ["AGENTS.md", "CLAUDE.md"]
+}

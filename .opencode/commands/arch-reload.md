@@ -1,0 +1,1 @@
+Call the tool `arch_reload`. Then call `arch_status` and output the status verbatim.

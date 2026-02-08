@@ -1,0 +1,184 @@
+{
+  "name": "hybrid-arch-opencode",
+  "displayName": "Hybrid Architecture for OpenCode",
+  "description": "Three-layer architecture (Global + Skill + Project) GUI for OpenCode hybrid-arch plugin",
+  "version": "1.0.0-kyle.1",
+  "publisher": "colerkks",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "opencode",
+    "hybrid-arch",
+    "skills",
+    "agents",
+    "ai"
+  ],
+  "activationEvents": [
+    "onCommand:hybridArch.showDashboard",
+    "onView:hybridArchExplorer",
+    "workspaceContains:**/.opencode/hybrid-arch.json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "hybridArch.showDashboard",
+        "title": "Show Dashboard",
+        "category": "Hybrid Arch",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "hybridArch.init",
+        "title": "Initialize Project",
+        "category": "Hybrid Arch",
+        "icon": "$(file-add)"
+      },
+      {
+        "command": "hybridArch.status",
+        "title": "Show Status",
+        "category": "Hybrid Arch",
+        "icon": "$(info)"
+      },
+      {
+        "command": "hybridArch.reload",
+        "title": "Reload Configuration",
+        "category": "Hybrid Arch",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "hybridArch.installSkill",
+        "title": "Install Skill",
+        "category": "Hybrid Arch",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "hybridArch.openSkill",
+        "title": "Open Skill",
+        "category": "Hybrid Arch"
+      },
+      {
+        "command": "hybridArch.refreshExplorer",
+        "title": "Refresh",
+        "category": "Hybrid Arch",
+        "icon": "$(refresh)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "hybridArchExplorer",
+          "name": "Hybrid Arch",
+          "when": "workspaceHasHybridArch",
+          "contextualTitle": "Hybrid Architecture"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "hybridArchExplorer",
+        "contents": "No hybrid architecture configuration found in this workspace.\n[Initialize Project](command:hybridArch.init)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hybridArch.refreshExplorer",
+          "when": "view == hybridArchExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "hybridArch.init",
+          "when": "view == hybridArchExplorer",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "hybridArch.openSkill",
+          "when": "view == hybridArchExplorer && viewItem == skill",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "hybridArch.showDashboard",
+          "when": "workspaceHasHybridArch"
+        },
+        {
+          "command": "hybridArch.status",
+          "when": "workspaceHasHybridArch"
+        },
+        {
+          "command": "hybridArch.reload",
+          "when": "workspaceHasHybridArch"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Hybrid Architecture",
+      "properties": {
+        "hybridArch.opencodePath": {
+          "type": "string",
+          "default": "opencode",
+          "description": "Path to OpenCode CLI executable"
+        },
+        "hybridArch.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show toast notifications for architecture events"
+        },
+        "hybridArch.autoReload": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically reload when configuration files change"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "hybridArch.showDashboard",
+        "key": "ctrl+shift+h",
+        "mac": "cmd+shift+h",
+        "when": "workspaceHasHybridArch"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "yaml": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colerkks/opencode-ai-hybrid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/colerkks/opencode-ai-hybrid/issues"
+  },
+  "homepage": "https://github.com/colerkks/opencode-ai-hybrid#readme",
+  "license": "MIT"
+}

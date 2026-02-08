@@ -1,0 +1,55 @@
+{
+  "name": "opencode-ai-hybrid",
+  "version": "1.0.0",
+  "description": "OpenCode AI Hybrid Plugin (Kyle1.0): Global + Skill + Project hybrid architecture + skill loader",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "opencode-ai-hybrid": "./bin/cli.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "install:plugin": "node ./bin/cli.js install"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "ai",
+    "architecture",
+    "skills",
+    "productivity"
+  ],
+  "author": "Kyle (@colerkks)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.0.0",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colerkks/opencode-ai-hybrid"
+  },
+  "bugs": {
+    "url": "https://github.com/colerkks/opencode-ai-hybrid/issues"
+  },
+  "homepage": "https://github.com/colerkks/opencode-ai-hybrid#readme"
+}
