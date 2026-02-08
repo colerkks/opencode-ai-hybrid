@@ -1,0 +1,1 @@
+Call the tool `arch_init` with installBuiltinSkills=true and writeCommands=true. Then call `arch_status` and output the status verbatim.

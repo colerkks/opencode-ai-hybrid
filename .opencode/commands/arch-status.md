@@ -1,0 +1,1 @@
+Call the tool `arch_status` and output the result verbatim. Do not add extra commentary.
