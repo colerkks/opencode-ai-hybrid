@@ -33,10 +33,11 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "peerDependencies": {},
   "dependencies": {
     "@opencode-ai/plugin": "^1.0.0",
-    "commander": "^11.1.0"
+    "commander": "^11.1.0",
+    "fs-extra": "^11.3.3",
+    "inquirer": "^13.2.2"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

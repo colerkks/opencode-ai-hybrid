@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "fs-extra": "^11.3.3",
+    "inquirer": "^13.2.2"
+  }
+}
