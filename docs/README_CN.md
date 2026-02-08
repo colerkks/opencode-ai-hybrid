@@ -23,26 +23,41 @@
 2. **mcpx** - 按需工具发现（节省 99% Token）
 3. **npx skills** - 标准化技能管理（跨平台）
 
-### 混合架构
+## 你能获得什么（一目了然）
 
+```mermaid
+flowchart TB
+  U[需求/Issue] --> P(Project Layer)
+  P --> A[AGENTS.md<br/>项目宪法：规则/边界/目录/风格]
+  P --> D[.next-docs/<br/>按需文档检索索引]
+  P --> L[skills.lock.json<br/>技能版本锁定]
+
+  subgraph CORE[Hybrid Engine]
+    direction TB
+    subgraph RAG[Doc-on-demand]
+      A --> R1[先检索再编码]
+      D --> R1
+    end
+    subgraph MCPX[Tool-on-demand]
+      M0[mcpx 工具目录] --> M1[动态加载工具定义]
+      M1 --> M2[调用工具链：build/test/lint/cli/api]
+    end
+    subgraph SK[Skills]
+      S0[npx skills] --> S1[安装技能包：SKILL.md 标准]
+      S1 --> S2[执行 SOP：拆解/调试/重构/发布]
+      L --> S2
+    end
+  end
+
+  R1 --> OUT[PR / Patch]
+  M2 --> OUT
+  S2 --> OUT
+
+  OUT --> FB[复盘回灌]
+  FB --> A
+  FB --> S1
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  项目层（最高优先级）                                         │
-│  ├── AGENTS.md              # 项目特定规则                   │
-│  ├── .next-docs/            # 文档索引                       │
-│  └── skills.lock.json       # 技能版本锁定                   │
-├─────────────────────────────────────────────────────────────┤
-│  技能层（中间优先级）                                         │
-│  ├── nextjs-docs-router     # Next.js 文档路由               │
-│  ├── nextjs-debug          # 调试标准作业程序                │
-│  └── [更多技能...]          # 可扩展                         │
-├─────────────────────────────────────────────────────────────┤
-│  全局层（基础优先级）                                         │
-│  ├── AGENTS.md             # 全局行为规则                    │
-│  ├── mcpx 配置             # 按需工具发现                    │
-│  └── npx skills            # 技能管理                        │
-└─────────────────────────────────────────────────────────────┘
-```
+
 
 **优先级规则**：项目 > 技能 > 全局
 
@@ -277,6 +292,28 @@ AI 助手：
 
 ---
 
+## 🏗️ 包含的内容
+
+### 📦 核心组件
+
+| 组件 | 描述 | 路径 |
+|-----------|-------------|------|
+| **VS Code 扩展** | 完整的 IDE 集成 | `vscode-extension/` |
+| **OpenCode 插件** | 桌面版插件 (Kyle1.0) | `plugins/opencode-ai-hybrid-plugin/` |
+| **CLI 命令** | 架构管理 | `.opencode/commands/` |
+| **技能库** | 预置技能 | `skills/` |
+| **示例项目** | 入门模板 | `examples/` |
+
+### 🆕 最新添加 (v3.1.0)
+
+- ✅ **VS Code 扩展** - 带仪表板的完整 IDE 集成
+- ✅ **GitHub 模板** - Issue 模板、PR 模板、安全政策
+- ✅ **增强文档** - 安装指南、路线图、更新日志
+- ✅ **项目结构文档** - 快速参考指南
+- ✅ **编辑器配置** - 一致的代码风格
+
+---
+
 ## 🏗️ 架构组件
 
 ### 1. AGENTS.md v3.0
@@ -297,6 +334,12 @@ AI 助手：
 - 版本锁定
 - 易于安装/更新
 
+### 4. VS Code 扩展 🆕
+- 用于架构管理的可视化仪表板
+- 技能和模板的树形视图
+- 快速操作和配置编辑
+- 集成文档浏览器
+
 ---
 
 ## 🌍 支持的平台
@@ -306,6 +349,56 @@ AI 助手：
 - ✅ Claude Code
 - ✅ GitHub Copilot
 - ✅ 以及 23+ 更多 AI 助手
+
+---
+
+## 📂 项目结构
+
+```
+opencode-ai-hybrid/
+├── 📁 .github/              # GitHub 配置
+│   ├── 📁 ISSUE_TEMPLATE/   # Issue 模板
+│   ├── 📄 PULL_REQUEST_TEMPLATE.md
+│   └── 📄 SECURITY.md       # 安全政策
+├── 📁 .opencode/            # OpenCode 命令
+│   └── 📁 commands/
+│       ├── 📄 arch-init.md
+│       ├── 📄 arch-reload.md
+│       └── 📄 arch-status.md
+├── 📁 config/               # 配置文件
+│   ├── 📄 AGENTS.md
+│   ├── 📄 hybrid-arch.json
+│   └── 📄 mcp.json
+├── 📁 docs/                 # 文档
+│   ├── 📄 README_CN.md      # 🇨🇳 中文文档
+│   ├── 📄 README_EN.md      # 🇺🇸 English
+│   ├── 📄 ARCHITECTURE.md
+│   ├── 📄 SKILLS_GUIDE.md
+│   ├── 📄 MIGRATION.md
+│   ├── 📄 FAQ.md
+│   ├── 📄 CHANGELOG.md      # 🆕 版本历史
+│   ├── 📄 INSTALLATION.md   # 🆕 安装指南
+│   ├── 📄 PROJECT_STRUCTURE.md # 🆕 快速参考
+│   └── 📄 ROADMAP.md        # 🆕 未来规划
+├── 📁 examples/             # 示例项目
+├── 📁 plugins/              # OpenCode 插件
+│   └── 📁 opencode-ai-hybrid-plugin/
+├── 📁 skills/               # 可用技能
+│   ├── 📁 nextjs-docs-router/
+│   └── 📁 nextjs-debug/
+├── 📁 vscode-extension/     # 🆕 VS Code 扩展
+├── 📄 .editorconfig         # 🆕 代码风格配置
+├── 📄 .gitignore
+├── 📄 CHANGELOG.md
+├── 📄 CONTRIBUTING.md
+├── 📄 INSTALLATION.md
+├── 📄 LICENSE
+├── 📄 PROJECT_STRUCTURE.md
+├── 📄 QUICKSTART.md
+├── 📄 README.md
+├── 📄 ROADMAP.md
+└── 📄 VERSION               # 🆕 当前版本
+```
 
 ---
 
