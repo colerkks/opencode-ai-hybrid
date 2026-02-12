@@ -8,6 +8,7 @@ PLUGIN_NAME="opencode-ai-hybrid"
 INSTALL_DIR="${HOME}/.opencode-ai-hybrid"
 CONFIG_DIR="${HOME}/.config/opencode"
 MCP_CONFIG_DIR="${HOME}/.config/mcp"
+HYBRID_CONFIG_DIR="${CONFIG_DIR}/opencode-ai-hybrid"
 
 echo "=========================================="
 echo "OpenCode AI Hybrid Uninstaller"
@@ -43,8 +44,9 @@ confirm() {
     echo "This will remove:"
     echo "  • Plugin files from: $CONFIG_DIR/plugins/"
     echo "  • Installation directory: $INSTALL_DIR"
-    echo "  • Global configuration: $CONFIG_DIR/AGENTS.md"
-    echo "  • MCP configuration"
+    echo "  • Plugin-owned config: $HYBRID_CONFIG_DIR"
+    echo ""
+    echo "It will NOT delete OpenCode global AGENTS.md, global skills, or global MCP config."
     echo ""
     echo -n "Are you sure you want to uninstall? [y/N] "
     read -r response
@@ -94,57 +96,37 @@ remove_installation() {
 
 # Remove global configuration
 remove_global_config() {
-    print_header "Removing Global Configuration..."
-    
-    # Backup prompt
-    if [[ -f "$CONFIG_DIR/AGENTS.md" ]]; then
-        echo ""
-        echo -n "Keep global AGENTS.md as backup? [Y/n] "
-        read -r keep_agents
-        if [[ "$keep_agents" =~ ^[Nn]$ ]]; then
-            rm -f "$CONFIG_DIR/AGENTS.md"
-            print_success "Removed global AGENTS.md"
-        else
-            backup_file="$CONFIG_DIR/AGENTS.md.backup.$(date +%Y%m%d)"
-            mv "$CONFIG_DIR/AGENTS.md" "$backup_file"
-            print_success "Backed up AGENTS.md to: $backup_file"
-        fi
+    print_header "Removing Plugin-Owned Configuration..."
+
+    if [[ -d "$HYBRID_CONFIG_DIR" ]]; then
+        rm -rf "$HYBRID_CONFIG_DIR"
+        print_success "Removed plugin-owned config directory"
+    else
+        print_warning "Plugin-owned config directory not found"
     fi
-    
-    # Remove hybrid-arch.json
+
     if [[ -f "$CONFIG_DIR/hybrid-arch.json" ]]; then
-        rm -f "$CONFIG_DIR/hybrid-arch.json"
-        print_success "Removed hybrid-arch.json"
+        print_warning "Kept legacy global file: $CONFIG_DIR/hybrid-arch.json"
+        print_warning "Remove manually only if you are sure no other setup uses it"
     fi
-    
-    # Remove skills
+
+    if [[ -f "$CONFIG_DIR/AGENTS.md" ]]; then
+        print_warning "Kept global OpenCode AGENTS.md"
+    fi
+
     if [[ -d "$CONFIG_DIR/skills" ]]; then
-        echo ""
-        echo -n "Remove installed skills? [y/N] "
-        read -r remove_skills
-        if [[ "$remove_skills" =~ ^[Yy]$ ]]; then
-            rm -rf "$CONFIG_DIR/skills"
-            print_success "Removed skills directory"
-        else
-            print_warning "Skills directory kept"
-        fi
+        print_warning "Kept global skills directory"
     fi
 }
 
 # Remove MCP configuration
 remove_mcp_config() {
-    print_header "Removing MCP Configuration..."
-    
+    print_header "MCP Configuration"
+
     if [[ -f "$MCP_CONFIG_DIR/.mcp.json" ]]; then
-        echo ""
-        echo -n "Remove MCP configuration? [y/N] "
-        read -r remove_mcp
-        if [[ "$remove_mcp" =~ ^[Yy]$ ]]; then
-            rm -f "$MCP_CONFIG_DIR/.mcp.json"
-            print_success "Removed MCP configuration"
-        else
-            print_warning "MCP configuration kept"
-        fi
+        print_warning "Kept global MCP configuration: $MCP_CONFIG_DIR/.mcp.json"
+    else
+        print_warning "Global MCP configuration not found"
     fi
 }
 
@@ -181,8 +163,12 @@ generate_report() {
     echo "The following have been removed:"
     echo "  ✓ Plugin files"
     echo "  ✓ Installation directory"
-    echo "  ✓ Global configuration (optional)"
-    echo "  ✓ MCP configuration (optional)"
+    echo "  ✓ Plugin-owned configuration"
+    echo ""
+    echo "The following were intentionally kept:"
+    echo "  • Global OpenCode AGENTS.md"
+    echo "  • Global OpenCode skills"
+    echo "  • Global MCP configuration"
     echo ""
     
     echo "Next steps:"

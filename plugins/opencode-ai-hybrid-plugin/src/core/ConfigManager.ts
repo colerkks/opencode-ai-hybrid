@@ -29,6 +29,8 @@ export class ConfigManager {
 
   private readonly globalConfigPath: string;
   private readonly globalAgentsPath: string;
+  private readonly legacyGlobalConfigPath: string;
+  private readonly legacyGlobalAgentsPath: string;
   private readonly projectConfigPath: string;
   private readonly projectOpencodeDir: string;
   private readonly skillsLockPath: string;
@@ -39,9 +41,23 @@ export class ConfigManager {
       os.homedir(),
       ".config",
       "opencode",
+      "opencode-ai-hybrid",
       "hybrid-arch.json",
     );
     this.globalAgentsPath = path.join(
+      os.homedir(),
+      ".config",
+      "opencode",
+      "opencode-ai-hybrid",
+      "AGENTS.md",
+    );
+    this.legacyGlobalConfigPath = path.join(
+      os.homedir(),
+      ".config",
+      "opencode",
+      "hybrid-arch.json",
+    );
+    this.legacyGlobalAgentsPath = path.join(
       os.homedir(),
       ".config",
       "opencode",
@@ -85,8 +101,17 @@ export class ConfigManager {
   async loadMergedState(): Promise<ArchitectureState> {
     if (this.cachedState) return this.cachedState;
 
+    const hasScopedGlobalConfig = await this.pathExists(this.globalConfigPath);
+    const hasLegacyGlobalConfig = await this.pathExists(this.legacyGlobalConfigPath);
+    const effectiveGlobalConfigPath = hasScopedGlobalConfig
+      ? this.globalConfigPath
+      : this.legacyGlobalConfigPath;
+    const effectiveGlobalAgentsPath = (await this.pathExists(this.globalAgentsPath))
+      ? this.globalAgentsPath
+      : this.legacyGlobalAgentsPath;
+
     const globalConfig = await this.loadJsonIfExists<GlobalLayerConfig>(
-      this.globalConfigPath,
+      effectiveGlobalConfigPath,
       {},
     );
     const projectConfig = await this.loadJsonIfExists<ProjectLayerConfig>(
@@ -106,12 +131,22 @@ export class ConfigManager {
     const globalSources: LayerSource[] = [
       {
         path: this.globalConfigPath,
-        exists: await this.pathExists(this.globalConfigPath),
+        exists: hasScopedGlobalConfig,
+        kind: "config",
+      },
+      {
+        path: this.legacyGlobalConfigPath,
+        exists: hasLegacyGlobalConfig,
         kind: "config",
       },
       {
         path: this.globalAgentsPath,
         exists: await this.pathExists(this.globalAgentsPath),
+        kind: "rules",
+      },
+      {
+        path: this.legacyGlobalAgentsPath,
+        exists: await this.pathExists(this.legacyGlobalAgentsPath),
         kind: "rules",
       },
     ];
@@ -171,7 +206,7 @@ export class ConfigManager {
 
     const state: ArchitectureState = {
       global: {
-        configPath: this.globalConfigPath,
+        configPath: effectiveGlobalConfigPath,
         config: globalConfig,
         sources: globalSources,
       },

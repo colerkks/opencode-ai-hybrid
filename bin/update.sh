@@ -7,6 +7,7 @@ set -euo pipefail
 PLUGIN_NAME="opencode-ai-hybrid"
 INSTALL_DIR="${HOME}/.opencode-ai-hybrid"
 CONFIG_DIR="${HOME}/.config/opencode"
+HYBRID_CONFIG_DIR="${CONFIG_DIR}/opencode-ai-hybrid"
 
 echo "=========================================="
 echo "OpenCode AI Hybrid Updater"
@@ -90,15 +91,19 @@ backup_current() {
     
     local backup_dir="${INSTALL_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
     
-    # Only backup config files, not the entire repo
+    # Only backup plugin-owned config files, not user/global OpenCode files
     mkdir -p "$backup_dir"
     
-    if [[ -f "$CONFIG_DIR/AGENTS.md" ]]; then
-        cp "$CONFIG_DIR/AGENTS.md" "$backup_dir/"
+    if [[ -f "$HYBRID_CONFIG_DIR/AGENTS.md" ]]; then
+        cp "$HYBRID_CONFIG_DIR/AGENTS.md" "$backup_dir/"
     fi
     
-    if [[ -f "$CONFIG_DIR/hybrid-arch.json" ]]; then
-        cp "$CONFIG_DIR/hybrid-arch.json" "$backup_dir/"
+    if [[ -f "$HYBRID_CONFIG_DIR/hybrid-arch.json" ]]; then
+        cp "$HYBRID_CONFIG_DIR/hybrid-arch.json" "$backup_dir/"
+    fi
+
+    if [[ -f "$HYBRID_CONFIG_DIR/mcp.json" ]]; then
+        cp "$HYBRID_CONFIG_DIR/mcp.json" "$backup_dir/"
     fi
     
     print_success "Backup created: $backup_dir"
@@ -160,12 +165,16 @@ install_updated_plugin() {
     local plugin_target="$CONFIG_DIR/plugins/$PLUGIN_NAME"
     
     if [[ -d "$plugin_source" ]]; then
-        # Remove old plugin
+        # Install new plugin dist atomically
+        local tmp_target="$plugin_target.new.$$"
+        rm -rf "$tmp_target" 2>/dev/null || true
+        mkdir -p "$tmp_target"
+        cp -r "$plugin_source" "$tmp_target/"
+
         rm -rf "$plugin_target" 2>/dev/null || true
-        
-        # Install new plugin
         mkdir -p "$plugin_target"
-        cp -r "$plugin_source" "$plugin_target/"
+        cp -r "$tmp_target/dist" "$plugin_target/"
+        rm -rf "$tmp_target" 2>/dev/null || true
         
         # Ensure entry point exists
         if [[ ! -f "$CONFIG_DIR/plugins/$PLUGIN_NAME.js" ]]; then
@@ -183,26 +192,47 @@ EOF
 # Update global configuration
 update_global_config() {
     print_header "Updating Global Configuration..."
+    mkdir -p "$HYBRID_CONFIG_DIR"
     
-    # Update AGENTS.md if newer version exists
+    # Update plugin-owned AGENTS.md if newer version exists
     if [[ -f "$INSTALL_DIR/config/AGENTS.md" ]]; then
-        if [[ ! -f "$CONFIG_DIR/AGENTS.md" ]] || [[ "$INSTALL_DIR/config/AGENTS.md" -nt "$CONFIG_DIR/AGENTS.md" ]]; then
-            cp "$INSTALL_DIR/config/AGENTS.md" "$CONFIG_DIR/AGENTS.md"
-            print_success "Updated AGENTS.md"
+        if [[ ! -f "$HYBRID_CONFIG_DIR/AGENTS.md" ]] || [[ "$INSTALL_DIR/config/AGENTS.md" -nt "$HYBRID_CONFIG_DIR/AGENTS.md" ]]; then
+            cp "$INSTALL_DIR/config/AGENTS.md" "$HYBRID_CONFIG_DIR/AGENTS.md"
+            print_success "Updated plugin-owned AGENTS.md"
         fi
     fi
     
-    # Update hybrid-arch.json
+    # Update plugin-owned hybrid-arch.json
     if [[ -f "$INSTALL_DIR/config/hybrid-arch.json" ]]; then
-        cp "$INSTALL_DIR/config/hybrid-arch.json" "$CONFIG_DIR/hybrid-arch.json"
-        print_success "Updated hybrid-arch.json"
+        cp "$INSTALL_DIR/config/hybrid-arch.json" "$HYBRID_CONFIG_DIR/hybrid-arch.json"
+        print_success "Updated plugin-owned hybrid-arch.json"
+    fi
+
+    # Update plugin-owned MCP reference
+    if [[ -f "$INSTALL_DIR/config/mcp.json" ]]; then
+        cp "$INSTALL_DIR/config/mcp.json" "$HYBRID_CONFIG_DIR/mcp.json"
+        print_success "Updated plugin-owned mcp.json"
     fi
     
-    # Update skills
+    # Install new built-in skills without overwriting existing user skills
     if [[ -d "$INSTALL_DIR/skills" ]]; then
         mkdir -p "$CONFIG_DIR/skills"
-        cp -r "$INSTALL_DIR/skills/"* "$CONFIG_DIR/skills/" 2>/dev/null || true
-        print_success "Updated skills"
+        for skill_dir in "$INSTALL_DIR/skills/"*; do
+            if [[ ! -d "$skill_dir" ]]; then
+                continue
+            fi
+
+            local skill_name
+            skill_name="$(basename "$skill_dir")"
+            local target_dir="$CONFIG_DIR/skills/$skill_name"
+            if [[ -d "$target_dir" ]]; then
+                print_warning "Skill exists, skipping overwrite: $skill_name"
+                continue
+            fi
+
+            cp -r "$skill_dir" "$target_dir"
+            print_success "Installed new skill: $skill_name"
+        done
     fi
 }
 
@@ -228,7 +258,7 @@ generate_report() {
     echo ""
     echo "✓ Repository updated"
     echo "✓ Plugin rebuilt and installed"
-    echo "✓ Global configuration updated"
+    echo "✓ Plugin-owned configuration updated"
     echo ""
     
     echo "Next steps:"

@@ -9,6 +9,8 @@ export declare class ConfigManager {
     private cachedState;
     private readonly globalConfigPath;
     private readonly globalAgentsPath;
+    private readonly legacyGlobalConfigPath;
+    private readonly legacyGlobalAgentsPath;
     private readonly projectConfigPath;
     private readonly projectOpencodeDir;
     private readonly skillsLockPath;

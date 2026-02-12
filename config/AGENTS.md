@@ -1,6 +1,6 @@
 # OpenCode AI Hybrid (Global)
 
-This is the *global* AGENTS.md installed to `~/.config/opencode/AGENTS.md` by `install.sh`.
+This is the plugin-owned AGENTS.md installed to `~/.config/opencode/opencode-ai-hybrid/AGENTS.md` by `install.sh`.
 
 ## Global Rules
 
@@ -14,4 +14,4 @@ This is the *global* AGENTS.md installed to `~/.config/opencode/AGENTS.md` by `i
 
 - Project (`./AGENTS.md`, `.opencode/hybrid-arch.json`) overrides
 - Skill (`skills.lock.json`, `.opencode/skills/`) overrides
-- Global (this file, `~/.config/opencode/hybrid-arch.json`) is the base
+- Global (this file, `~/.config/opencode/opencode-ai-hybrid/hybrid-arch.json`) is the base

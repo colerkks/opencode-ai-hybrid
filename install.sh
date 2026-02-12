@@ -13,6 +13,7 @@ REPO_URL="https://github.com/colerkks/opencode-ai-hybrid"
 INSTALL_DIR="${HOME}/.opencode-ai-hybrid"
 CONFIG_DIR="${HOME}/.config/opencode"
 MCP_CONFIG_DIR="${HOME}/.config/mcp"
+HYBRID_CONFIG_DIR="${CONFIG_DIR}/opencode-ai-hybrid"
 
 echo "[INFO] Checking prerequisites..."
 
@@ -79,9 +80,10 @@ fi
 # Setup AGENTS.md
 echo "[INFO] Setting up AGENTS.md..."
 mkdir -p "$CONFIG_DIR"
+mkdir -p "$HYBRID_CONFIG_DIR"
 if [[ -f "$INSTALL_DIR/config/AGENTS.md" ]]; then
-  cp "$INSTALL_DIR/config/AGENTS.md" "$CONFIG_DIR/AGENTS.md"
-  echo "[SUCCESS] AGENTS.md installed"
+  cp "$INSTALL_DIR/config/AGENTS.md" "$HYBRID_CONFIG_DIR/AGENTS.md"
+  echo "[SUCCESS] AGENTS.md installed to $HYBRID_CONFIG_DIR/AGENTS.md"
 else
   echo "[WARNING] Missing $INSTALL_DIR/config/AGENTS.md (repo may be incomplete)"
 fi
@@ -90,15 +92,16 @@ fi
 echo "[INFO] Setting up MCP configuration..."
 mkdir -p "$MCP_CONFIG_DIR"
 if [[ -f "$INSTALL_DIR/config/mcp.json" ]]; then
-    cp "$INSTALL_DIR/config/mcp.json" "$MCP_CONFIG_DIR/.mcp.json"
-    echo "[SUCCESS] MCP configuration installed"
+    cp "$INSTALL_DIR/config/mcp.json" "$HYBRID_CONFIG_DIR/mcp.json"
+    echo "[SUCCESS] MCP reference installed to $HYBRID_CONFIG_DIR/mcp.json"
+    echo "[INFO] Existing $MCP_CONFIG_DIR/.mcp.json was not modified"
 fi
 
 # Setup Hybrid Arch global config
 echo "[INFO] Setting up Hybrid Arch global config..."
 if [[ -f "$INSTALL_DIR/config/hybrid-arch.json" ]]; then
-  cp "$INSTALL_DIR/config/hybrid-arch.json" "$CONFIG_DIR/hybrid-arch.json"
-  echo "[SUCCESS] hybrid-arch.json installed"
+  cp "$INSTALL_DIR/config/hybrid-arch.json" "$HYBRID_CONFIG_DIR/hybrid-arch.json"
+  echo "[SUCCESS] hybrid-arch.json installed to $HYBRID_CONFIG_DIR/hybrid-arch.json"
 else
   echo "[WARNING] Missing $INSTALL_DIR/config/hybrid-arch.json"
 fi
@@ -106,7 +109,24 @@ fi
 # Setup skills
 echo "[INFO] Installing skills..."
 mkdir -p "$CONFIG_DIR/skills"
-cp -r "$INSTALL_DIR/skills/"* "$CONFIG_DIR/skills/" 2>/dev/null || true
+if [[ -d "$INSTALL_DIR/skills" ]]; then
+  for skill_dir in "$INSTALL_DIR/skills/"*; do
+    if [[ ! -d "$skill_dir" ]]; then
+      continue
+    fi
+
+    skill_name="$(basename "$skill_dir")"
+    target_dir="$CONFIG_DIR/skills/$skill_name"
+
+    if [[ -d "$target_dir" ]]; then
+      echo "[INFO] Skill exists, skipping overwrite: $target_dir"
+      continue
+    fi
+
+    cp -r "$skill_dir" "$target_dir"
+    echo "[SUCCESS] Installed skill: $skill_name"
+  done
+fi
 echo "[SUCCESS] Skills installed"
 
 # Build and setup OpenCode plugin
@@ -197,4 +217,5 @@ echo "  → 重新安装: ~/.opencode-ai-hybrid/bin/setup-plugin.sh"
 echo ""
 echo "📖 文档: $INSTALL_DIR/README.md"
 echo "📚 指南: $CONFIG_DIR/HYBRID_PLUGIN_GUIDE.md"
+echo "🧩 Hybrid config: $HYBRID_CONFIG_DIR"
 echo ""

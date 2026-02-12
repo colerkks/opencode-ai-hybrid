@@ -7,13 +7,17 @@ export class ConfigManager {
     cachedState = null;
     globalConfigPath;
     globalAgentsPath;
+    legacyGlobalConfigPath;
+    legacyGlobalAgentsPath;
     projectConfigPath;
     projectOpencodeDir;
     skillsLockPath;
     constructor(projectPath) {
         this.projectPath = projectPath;
-        this.globalConfigPath = path.join(os.homedir(), ".config", "opencode", "hybrid-arch.json");
-        this.globalAgentsPath = path.join(os.homedir(), ".config", "opencode", "AGENTS.md");
+        this.globalConfigPath = path.join(os.homedir(), ".config", "opencode", "opencode-ai-hybrid", "hybrid-arch.json");
+        this.globalAgentsPath = path.join(os.homedir(), ".config", "opencode", "opencode-ai-hybrid", "AGENTS.md");
+        this.legacyGlobalConfigPath = path.join(os.homedir(), ".config", "opencode", "hybrid-arch.json");
+        this.legacyGlobalAgentsPath = path.join(os.homedir(), ".config", "opencode", "AGENTS.md");
         this.projectOpencodeDir = path.join(this.projectPath, ".opencode");
         this.projectConfigPath = path.join(this.projectOpencodeDir, "hybrid-arch.json");
         this.skillsLockPath = path.join(this.projectPath, "skills.lock.json");
@@ -48,7 +52,15 @@ export class ConfigManager {
     async loadMergedState() {
         if (this.cachedState)
             return this.cachedState;
-        const globalConfig = await this.loadJsonIfExists(this.globalConfigPath, {});
+        const hasScopedGlobalConfig = await this.pathExists(this.globalConfigPath);
+        const hasLegacyGlobalConfig = await this.pathExists(this.legacyGlobalConfigPath);
+        const effectiveGlobalConfigPath = hasScopedGlobalConfig
+            ? this.globalConfigPath
+            : this.legacyGlobalConfigPath;
+        const effectiveGlobalAgentsPath = (await this.pathExists(this.globalAgentsPath))
+            ? this.globalAgentsPath
+            : this.legacyGlobalAgentsPath;
+        const globalConfig = await this.loadJsonIfExists(effectiveGlobalConfigPath, {});
         const projectConfig = await this.loadJsonIfExists(this.projectConfigPath, {});
         const lock = await this.loadJsonIfExists(this.skillsLockPath, {});
         const discoveredRules = await this.discoverProjectRuleFiles();
@@ -57,12 +69,22 @@ export class ConfigManager {
         const globalSources = [
             {
                 path: this.globalConfigPath,
-                exists: await this.pathExists(this.globalConfigPath),
+                exists: hasScopedGlobalConfig,
+                kind: "config",
+            },
+            {
+                path: this.legacyGlobalConfigPath,
+                exists: hasLegacyGlobalConfig,
                 kind: "config",
             },
             {
                 path: this.globalAgentsPath,
                 exists: await this.pathExists(this.globalAgentsPath),
+                kind: "rules",
+            },
+            {
+                path: this.legacyGlobalAgentsPath,
+                exists: await this.pathExists(this.legacyGlobalAgentsPath),
                 kind: "rules",
             },
         ];
@@ -118,7 +140,7 @@ export class ConfigManager {
         });
         const state = {
             global: {
-                configPath: this.globalConfigPath,
+                configPath: effectiveGlobalConfigPath,
                 config: globalConfig,
                 sources: globalSources,
             },
