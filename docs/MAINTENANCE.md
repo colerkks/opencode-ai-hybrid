@@ -39,10 +39,10 @@ The uninstaller will remove:
 | **Plugin files** | `~/.config/opencode/plugins/opencode-ai-hybrid/` | No |
 | **Plugin entry** | `~/.config/opencode/plugins/opencode-ai-hybrid.js` | No |
 | **Installation** | `~/.opencode-ai-hybrid/` | No |
-| **Global AGENTS.md** | `~/.config/opencode/AGENTS.md` | Yes (backup offered) |
-| **Hybrid config** | `~/.config/opencode/hybrid-arch.json` | No |
-| **MCP config** | `~/.config/mcp/.mcp.json` | Yes |
-| **Skills** | `~/.config/opencode/skills/` | Yes |
+| **Plugin-owned config** | `~/.config/opencode/opencode-ai-hybrid/` | No |
+| **Global AGENTS.md** | `~/.config/opencode/AGENTS.md` | Kept |
+| **MCP config** | `~/.config/mcp/.mcp.json` | Kept |
+| **Global skills** | `~/.config/opencode/skills/` | Kept |
 
 ### Manual Uninstall
 
@@ -57,14 +57,11 @@ rm -f ~/.config/opencode/plugins/opencode-ai-hybrid.js
 rm -rf ~/.opencode-ai-hybrid
 
 # 3. Remove global config (optional)
-rm -f ~/.config/opencode/AGENTS.md
-rm -f ~/.config/opencode/hybrid-arch.json
+rm -rf ~/.config/opencode/opencode-ai-hybrid
 
 # 4. Remove MCP config (optional)
-rm -f ~/.config/mcp/.mcp.json
-
-# 5. Remove skills (optional)
-rm -rf ~/.config/opencode/skills
+# (Not recommended) remove ONLY if this plugin created it:
+# rm -f ~/.config/mcp/.mcp.json
 ```
 
 ### Verify Uninstallation
@@ -114,8 +111,8 @@ curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/bi
 # 1. Navigate to installation directory
 cd ~/.opencode-ai-hybrid
 
-# 2. Backup current config
-cp ~/.config/opencode/AGENTS.md ~/AGENTS.md.backup
+# 2. Backup plugin-owned config
+cp -r ~/.config/opencode/opencode-ai-hybrid ~/opencode-ai-hybrid-config.backup
 
 # 3. Pull latest changes
 git pull origin main
@@ -128,9 +125,10 @@ npm run build
 # 5. Reinstall plugin
 cp -r dist ~/.config/opencode/plugins/opencode-ai-hybrid/
 
-# 6. Update global config
-cp config/AGENTS.md ~/.config/opencode/
-cp config/hybrid-arch.json ~/.config/opencode/
+# 6. Update plugin-owned config
+mkdir -p ~/.config/opencode/opencode-ai-hybrid
+cp config/AGENTS.md ~/.config/opencode/opencode-ai-hybrid/
+cp config/hybrid-arch.json ~/.config/opencode/opencode-ai-hybrid/
 
 # 7. Restart OpenCode
 ```
@@ -178,12 +176,11 @@ Create a backup:
 # Create backup directory
 mkdir -p ~/opencode-hybrid-backup-$(date +%Y%m%d)
 
-# Backup config files
-cp ~/.config/opencode/AGENTS.md ~/opencode-hybrid-backup-$(date +%Y%m%d)/
-cp ~/.config/opencode/hybrid-arch.json ~/opencode-hybrid-backup-$(date +%Y%m%d)/ 2>/dev/null || true
+# Backup plugin-owned config files
+cp -r ~/.config/opencode/opencode-ai-hybrid ~/opencode-hybrid-backup-$(date +%Y%m%d)/ 2>/dev/null || true
 
-# Backup skills
-cp -r ~/.config/opencode/skills ~/opencode-hybrid-backup-$(date +%Y%m%d)/ 2>/dev/null || true
+# Backup global skills (optional)
+cp -r ~/.config/opencode/skills ~/opencode-hybrid-backup-$(date +%Y%m%d)/skills-global 2>/dev/null || true
 
 # Backup project-specific configs (optional)
 find . -name ".opencode" -type d -exec cp -r {} ~/opencode-hybrid-backup-$(date +%Y%m%d)/ \; 2>/dev/null || true
@@ -194,9 +191,8 @@ find . -name ".opencode" -type d -exec cp -r {} ~/opencode-hybrid-backup-$(date 
 Restore from backup:
 
 ```bash
-# Restore global config
-cp ~/opencode-hybrid-backup-YYYYMMDD/AGENTS.md ~/.config/opencode/
-cp ~/opencode-hybrid-backup-YYYYMMDD/hybrid-arch.json ~/.config/opencode/
+# Restore plugin-owned config
+cp -r ~/opencode-hybrid-backup-YYYYMMDD/opencode-ai-hybrid ~/.config/opencode/
 
 # Restore skills
 cp -r ~/opencode-hybrid-backup-YYYYMMDD/skills ~/.config/opencode/
@@ -248,8 +244,8 @@ cp -r ~/opencode-hybrid-backup-YYYYMMDD/skills ~/.config/opencode/
 Force complete reinstall:
 
 ```bash
-# 1. Backup config
-cp ~/.config/opencode/AGENTS.md ~/AGENTS.md.backup
+# 1. Backup plugin-owned config
+cp -r ~/.config/opencode/opencode-ai-hybrid ~/opencode-ai-hybrid-config.backup
 
 # 2. Uninstall
 ~/.opencode-ai-hybrid/bin/uninstall.sh
@@ -257,8 +253,8 @@ cp ~/.config/opencode/AGENTS.md ~/AGENTS.md.backup
 # 3. Reinstall
 curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/install.sh | bash
 
-# 4. Restore custom config (if needed)
-cp ~/AGENTS.md.backup ~/.config/opencode/AGENTS.md
+# 4. Restore plugin-owned config (if needed)
+cp -r ~/opencode-ai-hybrid-config.backup ~/.config/opencode/opencode-ai-hybrid
 ```
 
 ### Configuration Conflicts
@@ -273,13 +269,14 @@ Reset to defaults:
 
 ```bash
 # Backup first
-cp ~/.config/opencode/AGENTS.md ~/AGENTS.md.custom
+cp -r ~/.config/opencode/opencode-ai-hybrid ~/opencode-ai-hybrid-config.custom
 
-# Reset to default
-curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/config/AGENTS.md > ~/.config/opencode/AGENTS.md
+# Reset plugin-owned config to default
+mkdir -p ~/.config/opencode/opencode-ai-hybrid
+curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/config/AGENTS.md > ~/.config/opencode/opencode-ai-hybrid/AGENTS.md
 
 # Merge your custom rules (manual)
-vim ~/.config/opencode/AGENTS.md
+vim ~/.config/opencode/opencode-ai-hybrid/AGENTS.md
 ```
 
 ---
@@ -351,11 +348,11 @@ else
     echo "✗ Plugin not installed"
 fi
 
-# Check config
-if [[ -f ~/.config/opencode/AGENTS.md ]]; then
-    echo "✓ Global AGENTS.md exists"
+# Check plugin-owned config
+if [[ -f ~/.config/opencode/opencode-ai-hybrid/AGENTS.md ]]; then
+    echo "✓ Plugin-owned AGENTS.md exists"
 else
-    echo "✗ Global AGENTS.md missing"
+    echo "✗ Plugin-owned AGENTS.md missing"
 fi
 
 # Check tools

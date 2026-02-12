@@ -132,19 +132,18 @@ export PATH="$HOME/.bun/bin:$PATH"
 ### AGENTS.md not loading
 
 ```bash
-# Check location
-ls ~/.config/opencode/AGENTS.md
+# Check plugin-owned location
+ls ~/.config/opencode/opencode-ai-hybrid/AGENTS.md
 
 # Reinstall
-cd ~/opencode-ai-hybrid
-./install.sh
+~/.opencode-ai-hybrid/bin/update.sh
 ```
 
 ## Get Help
 
 - 📖 [Documentation](./)
-- 🐛 [Issues](https://github.com/yourusername/opencode-ai-hybrid/issues)
-- 💬 [Discussions](https://github.com/yourusername/opencode-ai-hybrid/discussions)
+- 🐛 [Issues](https://github.com/colerkks/opencode-ai-hybrid/issues)
+- 💬 [Discussions](https://github.com/colerkks/opencode-ai-hybrid/discussions)
 
 ---
 

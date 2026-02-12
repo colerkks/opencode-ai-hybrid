@@ -18,8 +18,8 @@ curl -fsSL https://raw.githubusercontent.com/colerkks/opencode-ai-hybrid/main/in
 This will:
 - Install all dependencies
 - Configure mcpx
-- Set up global AGENTS.md
-- Install default skills
+- Install plugin-owned config under `~/.config/opencode/opencode-ai-hybrid/`
+- Install default skills without overwriting existing skill folders
 
 ### Method 2: Manual Installation
 
@@ -90,9 +90,9 @@ For GitHub API access:
 export GITHUB_TOKEN=your_github_token
 ```
 
-### 3. Configure Global AGENTS.md
+### 3. Configure Plugin-Owned AGENTS.md
 
-The installer creates `~/.config/opencode/AGENTS.md`. Customize it for your workflow.
+The installer creates `~/.config/opencode/opencode-ai-hybrid/AGENTS.md`. Customize it for your workflow.
 
 ## Troubleshooting
 
@@ -129,9 +129,7 @@ chmod +x install.sh
 To update to the latest version:
 
 ```bash
-cd opencode-ai-hybrid
-git pull origin main
-./install.sh
+~/.opencode-ai-hybrid/bin/update.sh
 ```
 
 ## Uninstallation
@@ -139,15 +137,24 @@ git pull origin main
 To remove the hybrid architecture:
 
 ```bash
-# Remove global config
-rm -rf ~/.config/opencode
-
-# Remove skills
-npm uninstall -g @vercel/skills
-
-# Remove mcpx
-npm uninstall -g mcpx
+~/.opencode-ai-hybrid/bin/uninstall.sh
 ```
+
+Manual safe cleanup (optional):
+
+```bash
+# Remove plugin files only
+rm -rf ~/.config/opencode/plugins/opencode-ai-hybrid
+rm -f ~/.config/opencode/plugins/opencode-ai-hybrid.js
+
+# Remove plugin-owned config only
+rm -rf ~/.config/opencode/opencode-ai-hybrid
+
+# Remove installation repo
+rm -rf ~/.opencode-ai-hybrid
+```
+
+Do not remove `~/.config/opencode/` entirely unless you intend to reset your whole OpenCode environment.
 
 ## Maintenance
 
@@ -168,8 +175,8 @@ For detailed maintenance instructions, see [MAINTENANCE.md](MAINTENANCE.md).
 ## Next Steps
 
 - Read the [Quick Start Guide](QUICKSTART.md)
-- Check out [Example Projects](examples/)
-- Learn about [Skills](docs/SKILLS_GUIDE.md)
+- Check out [Example Projects](../examples/)
+- Learn about [Skills](SKILLS_GUIDE.md)
 - Review [Maintenance Guide](MAINTENANCE.md)
 
 ## Support

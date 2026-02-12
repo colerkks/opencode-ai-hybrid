@@ -99,6 +99,17 @@ After installing, restart OpenCode Desktop and run:
 
 These commands are generated into `.opencode/commands/` by the plugin and call deterministic tools (`arch_status`, `arch_reload`, `arch_init`).
 
+### 1.7 Configuration Safety (Important)
+
+From the latest fixes, installer/update/uninstall scripts are non-destructive to OpenCode core settings:
+
+- Plugin-owned config lives at `~/.config/opencode/opencode-ai-hybrid/`
+- Global `~/.config/opencode/AGENTS.md` is no longer overwritten by default
+- Global `~/.config/opencode/skills/` is no longer deleted on uninstall
+- Global `~/.config/mcp/.mcp.json` is no longer overwritten or removed
+
+Legacy global paths are still read as fallback for backward compatibility.
+
 ### 🆕 Automatic Project Initialization
 
 The plugin now features **full auto-initialization**. When you open any project:
@@ -282,9 +293,9 @@ User: Create a blog page using 'use cache'
 
 AI Assistant:
 1. [Context Loading]
-   ├── Read ~/.config/opencode/AGENTS.md (Global rules)
+   ├── Read ~/.config/opencode/opencode-ai-hybrid/AGENTS.md (Plugin-owned global rules)
    ├── Check installed Skills (nextjs-docs-router)
-   └── Read ./AGENTS.md (Project constraints)
+   └── Read ./AGENTS.md (Project constraints, highest priority)
 
 2. [Skill Activation: nextjs-docs-router]
    ├── Detect keywords: 'use cache', Next.js
@@ -395,7 +406,7 @@ opencode-ai-hybrid/
 │       ├── 📄 arch-init.md
 │       ├── 📄 arch-reload.md
 │       └── 📄 arch-status.md
-├── 📁 config/               # Configuration files
+├── 📁 config/               # Plugin-owned defaults (installed to ~/.config/opencode/opencode-ai-hybrid/)
 │   ├── 📄 AGENTS.md
 │   ├── 📄 hybrid-arch.json
 │   └── 📄 mcp.json

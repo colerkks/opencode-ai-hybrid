@@ -31,7 +31,7 @@ Toast: "Auto-init: created skills.lock.json with nextjs-docs-router, nextjs-debu
 
 ## Configuration
 
-Default behavior is controlled by `~/.config/opencode/hybrid-arch.json`:
+Default behavior is controlled by `~/.config/opencode/opencode-ai-hybrid/hybrid-arch.json`:
 
 ```json
 {
