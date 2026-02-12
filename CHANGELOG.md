@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- No entries yet.
+
+## [3.1.1] - 2026-02-13
+
+### Fixed
+- Prevent installer and updater from overwriting OpenCode global files by default (`~/.config/opencode/AGENTS.md`, `~/.config/opencode/hybrid-arch.json`, `~/.config/mcp/.mcp.json`).
+- Prevent uninstaller from deleting global OpenCode skills and MCP configuration.
+- Prevent skill installation/update from overwriting existing user skill directories with the same name.
+
+### Changed
+- Store plugin-owned defaults under `~/.config/opencode/opencode-ai-hybrid/`.
+- Load plugin-owned global config first, with legacy global path fallback for backward compatibility.
+- Refresh README and maintenance/installation/quickstart docs to match non-destructive install/update/uninstall behavior.
+
+## [3.1.0] - 2026-02-08
+
 ### Added
 - VS Code extension for hybrid architecture management
 - OpenCode plugin system infrastructure
@@ -51,7 +67,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic architecture documentation
 - Installation scripts
 
-[Unreleased]: https://github.com/colerkks/opencode-ai-hybrid/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/colerkks/opencode-ai-hybrid/compare/v3.1.1...HEAD
+[3.1.1]: https://github.com/colerkks/opencode-ai-hybrid/compare/v3.1.0...v3.1.1
+[3.1.0]: https://github.com/colerkks/opencode-ai-hybrid/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/colerkks/opencode-ai-hybrid/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/colerkks/opencode-ai-hybrid/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/colerkks/opencode-ai-hybrid/releases/tag/v1.0.0

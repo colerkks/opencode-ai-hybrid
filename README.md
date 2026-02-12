@@ -4,7 +4,7 @@
 
 **The Industry-Leading AI Programming Environment**
 
-[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
+[![Version](https://img.shields.io/badge/version-3.1.1-blue.svg)](https://github.com/colerkks/opencode-ai-hybrid)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-brightgreen)](https://opencode.ai/)
